@@ -1,10 +1,9 @@
-/* eslint-disable import/no-unresolved */
 import './App.css';
 import { DocItem } from './docitem';
 
 const App = () => {
   return (
-    <div className="min-h-screen w-full">
+    <div className="max-h-screen w-full overflow-hidden">
       <DocItem />
     </div>
   );
