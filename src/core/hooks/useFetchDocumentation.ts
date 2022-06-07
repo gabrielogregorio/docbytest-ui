@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
+import { apiResponseDocType } from '../interfaces/api';
 
 export const useFetchDocumentation = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<apiResponseDocType>({
+    docs: '',
+    files: [],
+  });
 
   useEffect(() => {
     setIsLoading(true);

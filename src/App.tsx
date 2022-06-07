@@ -1,30 +1,30 @@
-import { useContext, useEffect, useState } from 'react';
-import { TestRunnerModal } from './testRunnerModal';
-import { Article } from './article';
-import { TestRunnerContext } from './core/contexts/testRunnerProvider';
+import { useEffect, useState } from 'react';
+import { GroupSuits } from './components/widgets/groupSuits';
+import { MdToHtml } from './core/helpers/mdToHtml';
 import { useFetchDocumentation } from './core/hooks/useFetchDocumentation';
+import { apiResponseFileTypes } from './core/interfaces/api';
 
 const App = () => {
-  const [paths, setPaths] = useState<any>([]);
+  const [files, setFiles] = useState<apiResponseFileTypes[]>([]);
   const [docs, setDocs] = useState<string>('');
-  const { testRunner } = useContext(TestRunnerContext);
+
   const { data } = useFetchDocumentation();
 
   useEffect(() => {
     if (data) {
-      setPaths(data.paths);
+      setFiles(data.files);
       setDocs(data.docs);
     }
   }, [data]);
 
-  const showTestRunner = testRunner.title;
-
   return (
-    <div className="max-h-screen w-full overflow-hidden">
+    <div className="w-full overflow-hidden">
       <div className={`grid grid-cols-12 w-full overflow-hidden `}>
-        <Article posts={paths} docs={docs} />
+        <main className="col-span-12 flex flex-col py-6 overflow-y-auto">
+          <MdToHtml markdown={docs} />
 
-        {showTestRunner ? <TestRunnerModal /> : null}
+          <GroupSuits files={files} />
+        </main>
       </div>
     </div>
   );

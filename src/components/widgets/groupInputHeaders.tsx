@@ -12,7 +12,7 @@ export const GroupInputHeaders = ({ headers }: { headers: any }) => {
               name="auth"
               id="auth"
               value={headers?.[keyRunner]?.toString()}
-              className="bg-transparent outline-none text-gray-700"
+              className="bg-transparent outline-none text-gray-700 w-full"
             />
           </div>
         );

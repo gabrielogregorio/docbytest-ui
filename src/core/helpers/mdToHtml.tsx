@@ -88,7 +88,7 @@ export const MdToHtml = ({ markdown }: { markdown: string }) => {
           const data = isLinkable.exec(item);
           if (data) {
             return (
-              <a className="text-blue-500" href={data[2]}>
+              <a target="_blank" className="text-blue-500" href={data[2]} rel="noreferrer">
                 {data[1]}
               </a>
             );
@@ -101,5 +101,5 @@ export const MdToHtml = ({ markdown }: { markdown: string }) => {
     });
   }
 
-  return <>{renderMarkdown()}</>;
+  return <div className="px-4">{renderMarkdown()}</div>;
 };
