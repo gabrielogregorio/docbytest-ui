@@ -1,4 +1,6 @@
-const dataBadge: any = {
+type badgeType = { [method: string]: { title: string; bg: string } };
+
+export const dataBadge: badgeType = {
   post: {
     title: 'POST',
     bg: 'bg-blue-500',
@@ -20,7 +22,12 @@ const dataBadge: any = {
   default: { title: 'desconhecido', bg: 'bg-gray-500' },
 };
 
-export const BadgePost = ({ method }: any) => {
+export const BadgeMethod = ({ method }: { method: string }) => {
   const { title, bg } = dataBadge?.[method] ?? dataBadge.default;
-  return <div className={`select-none ${bg} py-1 px-2 rounded-xl text-white text-sm`}>{title}</div>;
+
+  return (
+    <div>
+      <div className={`select-none ${bg} py-2 px-4 rounded-lg text-white text-sm w-20 text-center`}>{title}</div>
+    </div>
+  );
 };

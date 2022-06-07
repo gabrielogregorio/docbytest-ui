@@ -1,6 +1,6 @@
-import { paramsApiResponseType } from '../../core/interfaces/api';
+import { paramsType } from '../../core/interfaces/api';
 
-export const GroupInputParams = ({ params, title }: { params: paramsApiResponseType[]; title: string }) => {
+export const GroupInputParams = ({ params, title }: { params: paramsType[]; title: string }) => {
   if (params.length === 0) {
     return null;
   }

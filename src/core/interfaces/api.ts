@@ -1,22 +1,42 @@
-export type apiMethodType = 'GET' | 'POST' | 'PUT' | 'DELETE';
-
-export type paramsApiResponseType = {
-  example: string;
-  in: 'param' | 'query';
-  required: boolean;
+export type paramsType = {
   tag: string;
-  type: string;
   variable: string;
+  in: string;
+  required: null;
+  type: string;
+  example: string;
 };
 
-export type dataApiResponseType = {
+export type testsType = {
+  method: string;
+  sendContent: any;
+  params: paramsType[];
   title: string;
   description: string;
-  headers: any;
-  method: string;
-  params: paramsApiResponseType[];
-  response: any;
-  sendContent: string;
-  path: string;
   router: string;
+  path: string;
+  headers: any;
+  response: {
+    statusCode: string;
+    body: any;
+  };
+};
+
+export type testBaseObjectType = { tests: testsType[] };
+
+export type pathOnePathType = {
+  [method: string]: testBaseObjectType;
+};
+
+export type apiPathType = { [path: string]: pathOnePathType };
+
+export type apiResponseFileTypes = {
+  paths: apiPathType;
+  description: string;
+  title: string;
+};
+
+export type apiResponseDocType = {
+  files: apiResponseFileTypes[];
+  docs: string;
 };

@@ -1,6 +1,6 @@
-import { paramsApiResponseType } from '../interfaces/api';
+import { paramsType } from '../interfaces/api';
 
-export const mountUrlParams = (urlParams: paramsApiResponseType[]) => {
+export const mountUrlParams = (urlParams: paramsType[]) => {
   let mountParams = '';
   urlParams.forEach((url) => {
     mountParams += `${url.example}/`;
@@ -9,7 +9,7 @@ export const mountUrlParams = (urlParams: paramsApiResponseType[]) => {
   return mountParams;
 };
 
-export const mountQueryParams = (queryParams: paramsApiResponseType[]) => {
+export const mountQueryParams = (queryParams: paramsType[]) => {
   let mountParams = '?';
   queryParams.forEach((url) => {
     mountParams += `${url.tag}=${url.example}&`;
@@ -18,11 +18,24 @@ export const mountQueryParams = (queryParams: paramsApiResponseType[]) => {
   return mountParams;
 };
 
+const mountHeaderByType = (value: any): string => {
+  if (typeof value === 'string') {
+    return `${value}`;
+  }
+  return value;
+};
+
 export const mountHeadersParams = (headers: any) => {
+  if (!headers) {
+    return '';
+  }
+
   let mountHeaders = '';
+
   const keysHeader = Object.keys(headers);
-  keysHeader.forEach((key) => {
-    mountHeaders += `-H ${key}: ${headers[key]} `;
+  keysHeader.forEach((key, index) => {
+    const shouldBreakLine = keysHeader.length !== index + 1 ? '\n' : '';
+    mountHeaders += `--header "${key}: ${mountHeaderByType(headers[key])}" \\${shouldBreakLine}`;
   });
 
   return mountHeaders;
@@ -45,9 +58,28 @@ export const mountCurlRequest = ({
   mountQuery,
   mountHeaders,
 }: mountCurlRequestType) => {
-  return `curl -X ${method.toUpperCase()} \\
-    -d ${JSON.stringify(sendContent)} 'https://backend-valorant.herokuapp.com${path}/${mountParams || ''}${
+  const sendContentMounted = `'${JSON.stringify(sendContent, null, 2).replaceAll("'", '"')}'`;
+  const linkRequest = `http://127.0.0.1:3333${path}/${mountParams || ''}${
     mountQuery.slice(0, mountQuery.length - 1) || ''
-  }' \\
+  }`;
+
+  if (!mountHeaders && !sendContent) {
+    return `curl --location --request ${method.toUpperCase()} '${linkRequest}'`;
+  }
+
+  if (!sendContent && mountHeaders) {
+    return `curl --location --request ${method.toUpperCase()} '${linkRequest}'  \\
     ${mountHeaders}`;
+  }
+
+  if (sendContent && !mountHeaders) {
+    return `curl --location --request ${method.toUpperCase()} '${linkRequest}'  \\
+    --header 'Content-Type: application/json' \\
+    --data-raw ${sendContentMounted}`;
+  }
+
+  return `curl --location --request ${method.toUpperCase()} '${linkRequest}'  \\
+    ${mountHeaders}
+    --header 'Content-Type: application/json' \\
+    --data-raw ${sendContentMounted}`;
 };
