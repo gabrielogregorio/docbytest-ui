@@ -11,7 +11,7 @@ import {
 import { GroupInputHeaders } from './groupInputHeaders';
 import { JsonViewer } from './jsonViewer';
 import { paramsType } from '../../core/interfaces/api';
-import { initialTestRunnerType } from '../../core/interfaces/testRunner';
+import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 
 const mountCurlRequestOrchestrator = (
   queryParams: paramsType[],
@@ -39,47 +39,35 @@ const mountCurlRequestOrchestrator = (
   });
 };
 
-export const TestRunnerModal = ({ testRunner }: { testRunner: initialTestRunnerType }) => {
-  const queryParams = testRunner.params.filter((item: paramsType) => item.in === 'query');
-  const urlParams = testRunner.params.filter((item: paramsType) => item.in === 'param');
-  const { headers, method, path, sendContent } = testRunner;
+export const TestRunnerModal = ({ testRunner }: { testRunner: InitialTestRunnerType }) => {
+  const queryParams = testRunner?.params?.filter((item: paramsType) => item.in === 'query');
+  const urlParams = testRunner?.params?.filter((item: paramsType) => item.in === 'param');
+  const { headers, method, path, sendContent } = testRunner ?? {};
 
   const [body, setBody] = useState<string>('');
   const [response, setResponse] = useState<string>('');
 
   useEffect(() => {
-    if (testRunner.response) {
-      setResponse(testRunner.response?.body);
+    if (testRunner?.response) {
+      setResponse(testRunner?.response?.body);
     } else {
       setResponse('');
     }
-  }, [testRunner.response]);
+  }, [testRunner?.response]);
 
   useEffect(() => {
     setBody(mountCurlRequestOrchestrator(queryParams, urlParams, headers, method, path, sendContent));
   }, [testRunner]);
 
   return (
-    <div className="bg-gray-100 px-2 py-2 relative">
-      <div className="flex items-center border p-2 rounded-md">
-        <h4 className="font-bold text-gray-500 mr-3">Endpoint:</h4>
-
-        <input
-          type="text"
-          name="auth"
-          id="auth"
-          value={` http://127.0.0.1:3333${testRunner.router}`}
-          className="bg-transparent outline-none text-gray-700 w-full"
-        />
-      </div>
-
-      <GroupInputHeaders headers={headers} />
+    <div className="px-2 py-2 relative">
+      {headers ? <GroupInputHeaders headers={headers} /> : null}
       <GroupInputParams params={queryParams} title="Query" />
       <GroupInputParams params={urlParams} title="Parametros" />
 
       {sendContent ? <JsonViewer statusCode={0} response={sendContent} /> : null}
 
-      {response ? <JsonViewer statusCode={Number(testRunner.response?.statusCode)} response={response} /> : null}
+      {response ? <JsonViewer statusCode={Number(testRunner?.response?.statusCode)} response={response} /> : null}
 
       <div className="flex flex-col ">
         <h3 className="font-bold text-gray-500 mr-3 mb-2">Linguagem</h3>

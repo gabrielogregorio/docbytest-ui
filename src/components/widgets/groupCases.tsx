@@ -1,80 +1,73 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
 import { sortTestByStatusCode } from '../../core/helpers/sortTestByStatusCode';
-import { apiPathType, testBaseObjectType, testsType } from '../../core/interfaces/api';
-import { initialTestRunnerType } from '../../core/interfaces/testRunner';
-import { BadgeMethod } from './badgeMethod';
-import { RenderTests } from './renderTests';
-import { TestRunnerModal } from './testRunnerModal';
+import { apiPathType, testBaseObjectType } from '../../core/interfaces/api';
+import { SidebarBaseItemMenu } from '../sidebarBaseItemMenu';
 
-type badgeType = { [method: string]: { border: string } };
-
-const dataBadge: badgeType = {
-  post: {
-    border: 'border-blue-400',
-  },
-  get: {
-    border: 'border-green-400',
-  },
-  put: {
-    border: 'border-orange-400',
-  },
-
-  delete: {
-    border: 'border-red-400',
-  },
-  patch: { border: 'border-red-400' },
-  default: { border: 'border-gray-400' },
+type groupCasesType = {
+  paths: apiPathType;
+  title: string;
+  description: string;
+  filter: string;
 };
 
-function renderAllTests(tests: testsType[]) {
-  const [testRunner, setTestRunner] = useState<initialTestRunnerType>({
-    ...tests[0],
-    caseSelected: 0,
-  });
+const handleRemoveAccentuation = (text: string) => {
+  return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};
 
-  return (
-    <div className="mt-2 p-2">
-      <RenderTests tests={tests} testRunner={testRunner} setTestRunner={setTestRunner} />
+const normalizeStrings = (text: string = '') => {
+  const str = handleRemoveAccentuation(text);
+  return str.toLowerCase().trim();
+};
 
-      <TestRunnerModal testRunner={testRunner} />
-    </div>
-  );
-}
-
-export const GroupCases = ({ paths: fullObjectPaths }: { paths: apiPathType }) => {
+export const GroupCases = ({
+  paths: fullObjectPaths,
+  title: titleBase,
+  description: descriptionBase,
+  filter,
+}: groupCasesType) => {
   const paths = Object.keys(fullObjectPaths);
+  const { setTestSelected, testSelected } = useContext(TestSelectedContext);
 
   function renderCases() {
-    return paths?.map((path: string) => {
+    return paths?.map((path: string, indexPath: number) => {
       const methods = Object.keys(fullObjectPaths[path]);
 
-      return methods.map((method: string) => {
-        const { border } = dataBadge?.[method] ?? dataBadge.default;
-
+      return methods.map((method: string, indexMethod: number) => {
         const { tests }: testBaseObjectType = fullObjectPaths[path][method];
 
         const testsSorted = sortTestByStatusCode(tests);
 
-        const { method: localMethod, title, router } = testsSorted[0] ?? {};
+        const { method: localMethod, title, router, description } = testsSorted[0] ?? {};
+        const isSelected = testSelected?.indexSelected === `${titleBase}-${indexPath}-${indexMethod}`;
 
+        const existsFilter = filter !== '';
+        const filterNormalized = normalizeStrings(filter);
+        const notExistsMatchFilterInRouterOrTexts =
+          !normalizeStrings(router).includes(filterNormalized) &&
+          !normalizeStrings(description).includes(filterNormalized) &&
+          !normalizeStrings(title).includes(filterNormalized) &&
+          !normalizeStrings(titleBase).includes(filterNormalized) &&
+          !normalizeStrings(descriptionBase).includes(filterNormalized);
+
+        if (existsFilter && notExistsMatchFilterInRouterOrTexts) {
+          return null;
+        }
         return (
-          <div>
-            <details className={`text-gray-700 p-1.5 border rounded-lg my-1 ${border}`}>
-              <summary className=" flex w-full cursor-pointer">
-                <div className="flex items-center flex-1">
-                  <div>
-                    <BadgeMethod method={localMethod} />
-                  </div>
-
-                  <span className=" font-black ml-2 select-none">{router}</span>
-
-                  <p className="ml-2 flex-1 select-none"> {title}</p>
-                </div>
-              </summary>
-
-              {renderAllTests(testsSorted)}
-            </details>
-          </div>
+          <SidebarBaseItemMenu
+            isSelected={isSelected}
+            onClick={() =>
+              setTestSelected({
+                tests: testsSorted,
+                indexSelected: `${titleBase}-${indexPath}-${indexMethod}`,
+                titleBase,
+                descriptionBase,
+              })
+            }
+            localMethod={localMethod}
+            title={title}
+            method={method}
+          />
         );
       });
     });
