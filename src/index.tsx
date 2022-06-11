@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { TestSelectedProvider } from './core/contexts/testSelectedProvider';
+import { ThemeProvider } from './core/contexts/themProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <TestSelectedProvider>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </TestSelectedProvider>
   </React.StrictMode>,
 );
