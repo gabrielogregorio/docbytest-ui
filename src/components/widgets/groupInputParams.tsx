@@ -1,4 +1,5 @@
 import { paramsType } from '../../core/interfaces/api';
+import { InputParam } from './inputParam';
 
 export const GroupInputParams = ({ params, title }: { params: paramsType[]; title: string }) => {
   if (params.length === 0) {
@@ -7,20 +8,9 @@ export const GroupInputParams = ({ params, title }: { params: paramsType[]; titl
 
   return (
     <div>
-      <h3 className="font-bold text-gray-500 mr-3 mb-2">{title}</h3>
+      <h3 className="font-bold dark:text-gray-200 text-gray-600 mr-3 mb-2">{title}</h3>
       {params.map((item) => {
-        return (
-          <div className="flex items-center border border-gray-300 bg-gray-200 my-2 p-2 rounded-md">
-            <h4 className="font-bold text-gray-500 mr-3">{item.variable}</h4>
-            <input
-              type={item.type}
-              name="auth"
-              id="auth"
-              value={item.example}
-              className="bg-transparent outline-none text-gray-700"
-            />
-          </div>
-        );
+        return <InputParam label={item.variable} name="auth" type={item.type} value={item.example} />;
       })}
     </div>
   );
