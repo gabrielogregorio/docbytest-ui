@@ -1,9 +1,9 @@
 import { testsType } from '../../core/interfaces/api';
-import { initialTestRunnerType } from '../../core/interfaces/testRunner';
+import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 
 type renderTestsType = {
   tests: testsType[];
-  testRunner: initialTestRunnerType;
+  testRunner: InitialTestRunnerType;
   setTestRunner: Function;
 };
 

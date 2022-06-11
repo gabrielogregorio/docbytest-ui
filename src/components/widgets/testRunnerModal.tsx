@@ -11,7 +11,7 @@ import {
 import { GroupInputHeaders } from './groupInputHeaders';
 import { JsonViewer } from './jsonViewer';
 import { paramsType } from '../../core/interfaces/api';
-import { initialTestRunnerType } from '../../core/interfaces/testRunner';
+import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 
 const mountCurlRequestOrchestrator = (
   queryParams: paramsType[],
@@ -39,7 +39,7 @@ const mountCurlRequestOrchestrator = (
   });
 };
 
-export const TestRunnerModal = ({ testRunner }: { testRunner: initialTestRunnerType }) => {
+export const TestRunnerModal = ({ testRunner }: { testRunner: InitialTestRunnerType }) => {
   const queryParams = testRunner.params.filter((item: paramsType) => item.in === 'query');
   const urlParams = testRunner.params.filter((item: paramsType) => item.in === 'param');
   const { headers, method, path, sendContent } = testRunner;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { sortTestByStatusCode } from '../../core/helpers/sortTestByStatusCode';
 import { apiPathType, testBaseObjectType, testsType } from '../../core/interfaces/api';
-import { initialTestRunnerType } from '../../core/interfaces/testRunner';
+import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 import { BadgeMethod } from './badgeMethod';
 import { RenderTests } from './renderTests';
 import { TestRunnerModal } from './testRunnerModal';
@@ -27,7 +27,7 @@ const dataBadge: badgeType = {
 };
 
 function renderAllTests(tests: testsType[]) {
-  const [testRunner, setTestRunner] = useState<initialTestRunnerType>({
+  const [testRunner, setTestRunner] = useState<InitialTestRunnerType>({
     ...tests[0],
     caseSelected: 0,
   });

@@ -1,5 +1,5 @@
 import { testsType } from './api';
 
-export interface initialTestRunnerType extends testsType {
+export interface InitialTestRunnerType extends testsType {
   caseSelected: number;
 }
