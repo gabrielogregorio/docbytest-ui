@@ -10,7 +10,6 @@ import { apiResponseFileTypes } from './core/interfaces/api';
 
 const App = () => {
   const [files, setFiles] = useState<apiResponseFileTypes[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [docs, setDocs] = useState<string>('');
   const { testSelected, setTestSelected } = useContext(TestSelectedContext);
   const [filter, setFilter] = useState<string>('');

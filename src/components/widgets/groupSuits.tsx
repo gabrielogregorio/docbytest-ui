@@ -1,4 +1,3 @@
-/* eslint-disable react/no-children-prop */
 import { apiResponseFileTypes } from '../../core/interfaces/api';
 import { SidebarBaseMenu } from '../sidebarBaseMenu';
 import { GroupCases } from './groupCases';
