@@ -34,7 +34,7 @@ const App = () => {
               height: '7rem',
             }}>
             <header className="bg-cyan-500 dark:bg-cyan-700 text-white font-bold text-xl text-left p-3 py-2 uppercase flex items-center h-[3.5rem] min-h-[3.5rem]">
-              <img src="/logo.png" alt="Logo do docbytet" width="40px" height="10px" className="mr-2" />
+              <img src="/docs/logo.png" alt="Logo do docbytet" width="40px" height="10px" className="mr-2" />
               docbytest
             </header>
 
