@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BadgeMethod } from './badgeMethod';
 import { useGetUrlApi } from '../../core/hooks/useGetUrlApi';
 import { testsType } from '../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
@@ -35,7 +36,12 @@ export function renderAllTests(tests: testsType[], titleBase: string, descriptio
           ) : null}
           <span className="border-b-2 block" />
 
-          <InputParam label="Endpoint" name="auth" type="text" value={`${currentUrlOrigin}${testRunner?.router}`} />
+          <InputParam
+            label={<BadgeMethod onlyText method={testRunner?.method} />}
+            name="auth"
+            type="text"
+            value={`${currentUrlOrigin}${testRunner?.router}`}
+          />
 
           <RenderTests tests={tests} testRunner={testRunner} setTestRunner={setTestRunner} />
 
