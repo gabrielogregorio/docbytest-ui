@@ -1,3 +1,4 @@
+import { JsonColorizer } from '../../core/jsonBeautfull';
 import { CopyClipboard } from './copyClipboard';
 
 export const BoardViewer = ({ response, title, type }: { type: 'json' | 'text'; response: any; title: string }) => {
@@ -13,12 +14,12 @@ export const BoardViewer = ({ response, title, type }: { type: 'json' | 'text'; 
 
       <pre className="overflow-auto bg-gray-700 text-white py-1 px-1">
         <code className="bg-transparent outline-none w-full text-sm codeFont">
-          {type === 'json' ? JSON.stringify(response, null, 2) : response}
+          {type === 'json' ? <JsonColorizer text={JSON.stringify(response, null, 4)} /> : response}
         </code>
       </pre>
 
       <div className="absolute bottom-0 right-2">
-        <CopyClipboard dataToCopy={type === 'json' ? JSON.stringify(response, null, 2) : response} />
+        <CopyClipboard dataToCopy={type === 'json' ? JSON.stringify(response, null, 4) : response} />
       </div>
     </div>
   );
