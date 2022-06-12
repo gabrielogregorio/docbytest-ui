@@ -14,7 +14,7 @@ export type testsType = {
   title: string;
   description: string;
   router: string;
-  path: string;
+  fullPath: string;
   headers: any;
   response: {
     statusCode: string;
