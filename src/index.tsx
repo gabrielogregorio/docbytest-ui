@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { TestSelectedProvider } from './core/contexts/testSelectedProvider';
@@ -11,7 +12,11 @@ root.render(
   <React.StrictMode>
     <TestSelectedProvider>
       <ThemeProvider>
-        <App />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/docs" element={<App />} />
+          </Routes>
+        </BrowserRouter>
       </ThemeProvider>
     </TestSelectedProvider>
   </React.StrictMode>,

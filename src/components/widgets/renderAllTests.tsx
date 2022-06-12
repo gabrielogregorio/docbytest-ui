@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useGetUrlApi } from '../../core/hooks/useGetUrlApi';
 import { testsType } from '../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 import { InputParam } from './inputParam';
@@ -6,6 +7,7 @@ import { RenderTests } from './renderTests';
 import { TestRunnerModal } from './testRunnerModal';
 
 export function renderAllTests(tests: testsType[], titleBase: string, descriptionBase: string) {
+  const { currentUrlOrigin } = useGetUrlApi();
   const [testRunner, setTestRunner] = useState<InitialTestRunnerType>({
     ...tests?.[0],
     caseSelected: 0,
@@ -33,7 +35,7 @@ export function renderAllTests(tests: testsType[], titleBase: string, descriptio
           ) : null}
           <span className="border-b-2 block" />
 
-          <InputParam label="Endpoint" name="auth" type="text" value={` http://127.0.0.1:3333${testRunner?.router}`} />
+          <InputParam label="Endpoint" name="auth" type="text" value={`${currentUrlOrigin}${testRunner?.router}`} />
 
           <RenderTests tests={tests} testRunner={testRunner} setTestRunner={setTestRunner} />
 
