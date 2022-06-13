@@ -59,14 +59,7 @@ export const GroupSuits = ({ files, filter }: { files: apiResponseFileTypes[]; f
         });
       });
 
-      return (
-        <GroupCases
-          // @ts-ignore
-          listBase={listBase}
-          title={file.title}
-          description={file.description}
-        />
-      );
+      return <GroupCases listBase={listBase} title={file.title} description={file.description} />;
     });
   }
 
