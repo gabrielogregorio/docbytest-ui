@@ -3,11 +3,11 @@ import { commentColors } from '../../helpers/colors';
 import { renderHandlerMarkdownType } from '../../interfaces/interpreter';
 
 const extractUrls = (listAllOccurrence: any) => {
-  const regexHasLink = /(\[.*?\]\(.*?\))/;
+  const regexHasLink = /(\[.{0,1000}?\]\(.{0,1000}?\))/;
   const listOccurrences = listAllOccurrence.split(regexHasLink);
 
   return listOccurrences.map((item: any) => {
-    const isLinkable = /\[(.*?)\]\((.*?)\)/;
+    const isLinkable = /\[(.{0,1000}?)\]\((.{0,1000}?)\)/;
     const data = isLinkable.exec(item);
     if (data) {
       return (
@@ -63,7 +63,7 @@ export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
           if (!itemList) {
             return null;
           }
-          const removeStart = itemList.replace(/\s*\*\s*/, '');
+          const removeStart = itemList.replace(/\s{0,10}\*\s{0,10}/, '');
           return <li>{removeStart}</li>;
         })}
       </ul>

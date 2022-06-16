@@ -96,7 +96,7 @@ export const InterpreterMarkdown = ({ text, reInterpreter, renderHandlerMarkdown
         }
       }
 
-      content = content.replace(/\s*\n/, '');
+      content = content.replace(/\s{0,10}\n/, '');
       return <span key={generateIds()} />;
     });
   }

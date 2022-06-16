@@ -29,6 +29,8 @@ const App = () => {
     }
   }, [data]);
 
+  const notExistsSelectedTests = testSelected.tests.length === 0;
+
   return (
     <div className={`w-full overflow-hidden ${theme === 'dark' ? 'dark' : ''} `}>
       <nav
@@ -126,7 +128,7 @@ const App = () => {
             style={{
               height: 'calc(100vh - 3.5rem)',
             }}>
-            {testSelected.tests.length === 0 ? (
+            {notExistsSelectedTests ? (
               <InterpreterMarkdown
                 text={docs}
                 reInterpreter={reInterpreterDefault}
