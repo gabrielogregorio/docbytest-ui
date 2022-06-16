@@ -6,10 +6,12 @@ import { GroupSuits } from './components/widgets/groupSuits';
 import { renderAllTests } from './components/widgets/renderAllTests';
 import { TestSelectedContext } from './core/contexts/testSelectedProvider';
 import { ThemeContext } from './core/contexts/themProvider';
-import { MdToHtml } from './core/helpers/mdToHtml';
 import { useFetchDocumentation } from './core/hooks/useFetchDocumentation';
 import { apiResponseFileTypes } from './core/interfaces/api';
 import Logo from './assets/logo.png';
+import { InterpreterMarkdown } from './components/interpreterMarkdown';
+import { reInterpreterDefault } from './core/handlers/default/reInterpreter';
+import { renderHandlerMarkdownDocbytest } from './core/handlers/docbytest/renderHtmlMarkdow';
 
 const App = () => {
   const [files, setFiles] = useState<apiResponseFileTypes[]>([]);
@@ -26,6 +28,8 @@ const App = () => {
       setDocs(data.docs);
     }
   }, [data]);
+
+  const notExistsSelectedTests = testSelected.tests.length === 0;
 
   return (
     <div className={`w-full overflow-hidden ${theme === 'dark' ? 'dark' : ''} `}>
@@ -124,7 +128,13 @@ const App = () => {
             style={{
               height: 'calc(100vh - 3.5rem)',
             }}>
-            {testSelected.tests.length === 0 ? <MdToHtml markdown={docs} /> : null}
+            {notExistsSelectedTests ? (
+              <InterpreterMarkdown
+                text={docs}
+                reInterpreter={reInterpreterDefault}
+                renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
+              />
+            ) : null}
             {renderAllTests(testSelected?.tests ?? [], testSelected.titleBase, testSelected.descriptionBase)}
           </div>
         </main>
