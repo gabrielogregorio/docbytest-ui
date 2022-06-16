@@ -1,10 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { InterpreterMarkdown } from '../components/interpreterMarkdown';
 
+import { reInterpreterDefault } from '../core/handlers/default/reInterpreter';
+import { renderHandlerMarkdownDefault } from '../core/handlers/default/renderHtmlMarkdow';
+
 test('Interpreter Markdown', () => {
   render(
     <InterpreterMarkdown
-      text={`# API subtitle 1
+      reInterpreter={reInterpreterDefault}
+      renderHandlerMarkdown={renderHandlerMarkdownDefault}
+      text={`# API subtitle 1 
     
     ## API subtitle 2
     
@@ -28,8 +33,6 @@ test('Interpreter Markdown', () => {
     * item2
     * item1
     
-    [frontend](valorant-tips)
-
 
 | Syntax      | Description |
 | ----------- | ----------- |
@@ -57,7 +60,6 @@ test('Interpreter Markdown', () => {
   expect(screen.getByTestId('code').textContent).toEqual(`typescript - import os\n    print(os.system(''));`);
   expect(screen.getByTestId('special').textContent).toEqual('Tabelá de erros - errors_status_table');
   expect(screen.getByTestId('completeList').textContent).toEqual('* item2\n    * item1');
-  expect(screen.getByTestId('links').textContent).toEqual('frontend - valorant-tips');
 
   expect(screen.getByTestId('tbody').textContent).toEqual('| Syntax      | Description |');
   expect(screen.getByTestId('thead').textContent).toEqual(
