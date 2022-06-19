@@ -43,7 +43,7 @@ const App = () => {
             <button
               type="button"
               onClick={() => setMenuIsOpen((prev) => !prev)}
-              className="mr-2 lg:hidden border border-gray-300 dark:border-cyan-700 bg-gray-100 dark:bg-cyan-600 rounded-full p-2 text-cyan-600 dark:text-white">
+              className="mr-2 lg:hidden border border-gray-300 dark:border-cyan-700 bg-white dark:bg-cyan-600 rounded-full p-2 text-cyan-600 dark:text-white">
               <IconMenu />
             </button>
 
@@ -79,11 +79,11 @@ const App = () => {
         </header>
       </nav>
 
-      <div className="grid grid-cols-12 w-full overflow-hidden max-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white relative">
+      <div className="grid grid-cols-12 w-full overflow-hidden max-h-screen bg-white dark:bg-gray-900 dark:text-white relative">
         <aside
           className={`absolute top-0  ${
             menuIsOpen ? 'w-full sm:w-80 lg:w-full' : 'w-0 lg:w-full'
-          } z-20 left-0 lg:relative lg:block lg:col-span-3  bg-gray-100 dark:bg-gray-900`}>
+          } z-20 left-0 lg:relative lg:block lg:col-span-3  bg-white dark:bg-gray-900`}>
           <div className="flex items-center border-b-2 border-b-gray-200 dark:border-b-gray-600 p-2 m-2 dark:hover:border-b-cyan-500 hover:border-b-cyan-500 transition duration-150">
             <input
               type="search"
@@ -101,19 +101,19 @@ const App = () => {
               height: 'calc(100vh - 8rem)',
             }}>
             <div className="flex flex-col px-2">
-              <SidebarBaseMenu title="Instrudução">
+              <SidebarBaseMenu title="🚀 Getting Started">
                 <SidebarBaseItemMenu
                   isSelected={testSelected.indexSelected === 'readme'}
                   onClick={() =>
                     setTestSelected({
                       tests: [],
                       indexSelected: `readme`,
-                      titleBase: 'Instrodução',
+                      titleBase: '',
                       descriptionBase: '',
                     })
                   }
-                  localMethod=""
-                  title="Introdução"
+                  localMethod="introduction"
+                  title="🧑‍💻 Introduction"
                   method=""
                 />
               </SidebarBaseMenu>

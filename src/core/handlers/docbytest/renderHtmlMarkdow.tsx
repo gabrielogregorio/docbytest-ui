@@ -1,6 +1,26 @@
 import { ReactNode } from 'react';
+import { useGetUrlApi } from '../../hooks/useGetUrlApi';
+import { BoardViewer } from '../../../components/widgets/boardViewer';
 import { commentColors } from '../../helpers/colors';
 import { renderHandlerMarkdownType } from '../../interfaces/interpreter';
+
+const extractBolder = (listAllOccurrence: any) => {
+  const regexHasLink = /(\*\*.*?\*\*)/;
+  const listOccurrences = listAllOccurrence.split(regexHasLink);
+
+  return listOccurrences.map((item: any) => {
+    const isLinkable = /(\*\*.*?\*\*)/;
+    const data = isLinkable.exec(item);
+    if (data) {
+      return (
+        <span title={data[1]} className="font-bold">
+          {data[1].slice(2, data[1].length - 2)}
+        </span>
+      );
+    }
+    return <span>{item}</span>;
+  });
+};
 
 const extractUrls = (listAllOccurrence: any) => {
   const regexHasLink = /(\[.{0,1000}?\]\(.{0,1000}?\))/;
@@ -11,14 +31,21 @@ const extractUrls = (listAllOccurrence: any) => {
     const data = isLinkable.exec(item);
     if (data) {
       return (
-        <a target="_blank" className="text-blue-500 dark:text-blue-400" href={data[2]} rel="noreferrer">
-          {data[1]}
+        <a
+          title={data[2]}
+          target="_blank"
+          className="text-blue-500 dark:text-blue-400 hover:underline"
+          href={data[2]}
+          rel="noreferrer">
+          {extractBolder(data[1])}
         </a>
       );
     }
-    return <span>{item}</span>;
+    return <span>{extractBolder(item)}</span>;
   });
 };
+
+const { currentUrlOrigin } = useGetUrlApi();
 
 export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
   base: (children: ReactNode) => {
@@ -42,13 +69,12 @@ export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
   h6: (content: string) => (
     <h6 className="text-sm font-bold dark:text-gray-100 text-gray-700 mb-3 my-2">{content.trim()}</h6>
   ),
-  code: (language: string, code: string) => (
-    <pre className="p-2 my-3 bg-gray-700 dark:text-gray-200 text-white rounded-md ">
-      <code>
-        {language} - {code.trim()}
-      </code>
-    </pre>
-  ),
+  code: (language: string, code: string) => {
+    const isJson = language === 'json';
+    return <BoardViewer type={language} title={isJson ? 'json' : ''} response={isJson ? JSON.parse(code) : code} />;
+  },
+  hr: () => <hr className="bg-transparent border-b-1 border-b-gray-100 my-4" />,
+  image: (description: string, link: string) => <img src={`${currentUrlOrigin}${link}`} alt={description} />,
   specialTable: (key: string, value: string) => {
     return (
       <span data-testid="special">
@@ -63,8 +89,8 @@ export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
           if (!itemList) {
             return null;
           }
-          const removeStart = itemList.replace(/\s{0,10}\*\s{0,10}/, '');
-          return <li>{removeStart}</li>;
+          const removeStart = itemList.replace(/\s{0,10}[\\*•]\s{0,10}/, '');
+          return <li>{extractUrls(removeStart)}</li>;
         })}
       </ul>
     );
@@ -106,16 +132,28 @@ export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
     );
   },
   comment: (color: string, title: string, text: string) => {
-    const colorFinal = color.trim().toLowerCase();
+    const removeSpecialCharacters = (textItem: string) => {
+      return textItem.replace(/^\s{0,10}>\s{0,10}/, '');
+    };
+
+    const colorFinal = removeSpecialCharacters(color.trim().toLowerCase());
 
     const backgroundColor = commentColors[colorFinal]?.bg || commentColors.default.bg;
     const titleColor = commentColors[colorFinal]?.title || commentColors.default.title;
     const textColor = commentColors[colorFinal]?.text || commentColors.default.text;
 
+    const linesComment = text.split('\n');
+
     return (
-      <div className={backgroundColor}>
-        <h4 className={`uppercase text-lg font-bold ${titleColor} py-2 pt-3`}>{extractUrls(title)}</h4>
-        <p className={` text-lg font-base ${textColor} py-0.5 pb-3`}>{extractUrls(text)}</p>
+      <div className={`${backgroundColor} py-4`}>
+        <h4 className={`uppercase text-lg font-bold ${titleColor}`}>{extractUrls(title)} aaa</h4>
+        {linesComment.map((lineComment) => {
+          return (
+            <p className={` text-lg font-base ${textColor} pt-2`}>
+              {extractUrls(removeSpecialCharacters(lineComment))}
+            </p>
+          );
+        })}
       </div>
     );
   },

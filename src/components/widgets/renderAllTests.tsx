@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { reInterpreterDefault } from '../../core/handlers/default/reInterpreter';
+import { renderHandlerMarkdownDocbytest } from '../../core/handlers/docbytest/renderHtmlMarkdow';
+import { InterpreterMarkdown } from '../interpreterMarkdown';
 import { BadgeMethod } from './badgeMethod';
 import { useGetUrlApi } from '../../core/hooks/useGetUrlApi';
 import { testsType } from '../../core/interfaces/api';
@@ -32,24 +35,30 @@ export function renderAllTests(tests: testsType[], titleBase: string, descriptio
           ) : null}
 
           {descriptionBase ? (
-            <p className="dark:text-gray-200 text-gray-600 text-base my-5 mt-2">{descriptionBase}</p>
+            <InterpreterMarkdown
+              text={descriptionBase}
+              reInterpreter={reInterpreterDefault}
+              renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
+            />
           ) : null}
           <span className="border-b-2 block" />
-
           <InputParam
             label={<BadgeMethod onlyText method={testRunner?.method} />}
             name="auth"
             type="text"
             value={`${currentUrlOrigin}${testRunner?.router}`}
           />
-
           <RenderTests tests={tests} testRunner={testRunner} setTestRunner={setTestRunner} />
-
           {testRunner.title ? (
             <h2 className="uppercase dark:text-gray-200 text-gray-600 font-bold text-lg mt-2">{testRunner.title}</h2>
           ) : null}
+
           {testRunner.description ? (
-            <p className="dark:text-gray-200 text-gray-600 text-base my-3 pb-4">{testRunner.description}</p>
+            <InterpreterMarkdown
+              text={testRunner.description}
+              reInterpreter={reInterpreterDefault}
+              renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
+            />
           ) : null}
           {testRunner.method ? <TestRunnerModal testRunner={testRunner} /> : null}
         </>
