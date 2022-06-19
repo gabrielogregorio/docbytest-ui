@@ -10,7 +10,6 @@ import { GroupInputHeaders } from './groupInputHeaders';
 import { BoardViewer } from './boardViewer';
 import { paramsType } from '../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
-import { InsideMenu } from './insideMenu';
 
 const mountCurlRequestOrchestrator = (
   queryParams: paramsType[],
@@ -66,28 +65,21 @@ export const TestRunnerModal = ({ testRunner }: { testRunner: InitialTestRunnerT
       {sendContent ? (
         <div>
           <h3 className="font-bold dark:text-gray-200 text-gray-600 mr-3 mb-2">Payload</h3>
-          <BoardViewer type="json" response={sendContent} title="Payload" />
+          <BoardViewer type="json" response={sendContent} title="json" />
         </div>
       ) : null}
 
       {response ? (
         <div>
           <h3 className="font-bold dark:text-gray-200 text-gray-600 mr-3 mb-2">Resposta</h3>
-          <BoardViewer type="json" response={response} title="Resposta" />
+          <BoardViewer type="json" response={response} title="json" />
         </div>
       ) : null}
-
-      <div className="flex flex-col ">
-        <h3 className="font-bold dark:text-gray-200 text-gray-600 mr-3 mb-2">Linguagem</h3>
-        <div className="flex">
-          <InsideMenu isSelected text="cURL" onClick={() => null} />
-        </div>
-      </div>
 
       {body ? (
         <div>
           <h3 className="font-bold dark:text-gray-200 text-gray-600 mr-3 mb-2">Requisição</h3>
-          <BoardViewer type="text" response={body} title="Request" />
+          <BoardViewer type="text" response={body} title="curl" />
         </div>
       ) : null}
     </div>

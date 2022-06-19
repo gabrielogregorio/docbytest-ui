@@ -39,7 +39,8 @@ export const renderHandlerMarkdownDefault: renderHandlerMarkdownType = {
       </div>
     );
   },
-
+  image: () => <p>image</p>,
+  hr: () => <hr />,
   paragraph: (paragraph: string) => {
     return <p data-testid="paragraph">{paragraph.trim()}</p>;
   },

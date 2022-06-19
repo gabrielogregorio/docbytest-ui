@@ -10,7 +10,7 @@ export const GroupExplainedHeaders = ({ headers }: { headers: any }) => {
       <div className="rounded-md border-2">
         {headersKey.map((headerKey: any) => {
           return (
-            <div className="bg-gray-100 p-3">
+            <div className="bg-white p-3">
               <div>
                 <span className="font-bold">{headerKey}</span> <span className="">unknown</span> any
               </div>

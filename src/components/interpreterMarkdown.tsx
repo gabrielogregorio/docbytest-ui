@@ -10,8 +10,8 @@ type InterpreterMarkdownInterface = {
 };
 
 export const InterpreterMarkdown = ({ text, reInterpreter, renderHandlerMarkdown }: InterpreterMarkdownInterface) => {
-  let content = `\n${text}\n`;
-  const arrayTry = Array.from(Array(text.split('\n').length).keys());
+  let content = `\n\n${text}\n\n`;
+  const arrayTry = Array.from(Array(content.split('\n').length).keys());
 
   function renderInterpreter() {
     return arrayTry.map(() => {
@@ -57,6 +57,12 @@ export const InterpreterMarkdown = ({ text, reInterpreter, renderHandlerMarkdown
         return <span key={generateIds()}>{renderHandlerMarkdown.code(isCode[1], isCode[2].trim())}</span>;
       }
 
+      const isHr = reInterpreter.isHr.exec(content);
+      if (isHr) {
+        content = replaceToMatch(content, isHr);
+        return <span key={generateIds()}>{renderHandlerMarkdown.hr()}</span>;
+      }
+
       const isSpecialTable = reInterpreter.isSpecialTable.exec(content);
       if (isSpecialTable) {
         content = replaceToMatch(content, isSpecialTable);
@@ -71,6 +77,12 @@ export const InterpreterMarkdown = ({ text, reInterpreter, renderHandlerMarkdown
       if (isCompleteList) {
         content = replaceToMatch(content, isCompleteList);
         return <span key={generateIds()}>{renderHandlerMarkdown.list(isCompleteList[0])}</span>;
+      }
+
+      const isImage = reInterpreter.isImage.exec(content);
+      if (isImage) {
+        content = replaceToMatch(content, isImage);
+        return <span key={generateIds()}> {renderHandlerMarkdown.image(isImage[1], isImage[2])}</span>;
       }
 
       const isTable = reInterpreter.isTable.exec(content);
@@ -89,14 +101,13 @@ export const InterpreterMarkdown = ({ text, reInterpreter, renderHandlerMarkdown
 
       const isParagraph = reInterpreter.isParagraph.exec(content);
       if (isParagraph) {
-        const paragraphIsEmpty = isParagraph[0].replace(/[\n\s]/g, '') !== '';
-        if (paragraphIsEmpty) {
-          content = replaceToMatch(content, isParagraph);
-          return <span key={generateIds()}> {renderHandlerMarkdown.paragraph(isParagraph[0])}</span>;
-        }
+        content = replaceToMatch(content, isParagraph);
+
+        return <span key={generateIds()}> {renderHandlerMarkdown.paragraph(isParagraph[0])}</span>;
       }
 
-      content = content.replace(/\s{0,10}\n/, '');
+      content = content.replace(/^\s{0,300}\n/, '');
+
       return <span key={generateIds()} />;
     });
   }

@@ -22,6 +22,11 @@ export const dataBadge: badgeType = {
     bg: 'dark:border-red-300 text-red-500 dark:text-red-300',
     border: 'border-l-2 border-red-500',
   },
+  introduction: {
+    title: 'START',
+    bg: 'dark:border-purple-300 text-purple-500 dark:text-purple-300',
+    border: 'border-l-2 border-purple-500',
+  },
   default: { title: 'desconhecido', bg: 'bg-gray-500', border: 'border-l-2 border-gray-500' },
 };
 

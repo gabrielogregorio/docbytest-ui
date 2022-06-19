@@ -1,7 +1,7 @@
 import { JsonColorizer } from '../../core/jsonBeautfull';
 import { CopyClipboard } from './copyClipboard';
 
-export const BoardViewer = ({ response, title, type }: { type: 'json' | 'text'; response: any; title: string }) => {
+export const BoardViewer = ({ response, title, type }: { type: string; response: any; title: string }) => {
   return (
     <div className="relative flex flex-col mb-2">
       <div className="flex bg-gray-800 text-gray-700 py-1 px-1">

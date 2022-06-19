@@ -36,7 +36,7 @@ const isNumberAndStatusCode = (statusCode: string): ReactNode => {
 
 export const InsideMenu = ({ onClick, isSelected, text }: insideMenu) => {
   const styleIsCaseSelected = isSelected
-    ? 'border-b-4 border-b-cyan-500 bg-gray-50 dark:bg-gray-700'
+    ? 'border-b-4 border-b-cyan-500 bg-gray-100 dark:bg-gray-700'
     : 'border-b-4 border-b-gray-200 dark:border-b-gray-600 dark:bg-gray-900';
 
   return (

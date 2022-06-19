@@ -7,6 +7,8 @@ export type regexInterpreterType = {
   isCompleteList: RegExp;
   isSpecialTable: RegExp;
   isCode: RegExp;
+  isHr: RegExp;
+  isImage: RegExp;
   isTitleH1: RegExp;
   isTitleH2: RegExp;
   isTitleH3: RegExp;
@@ -24,6 +26,8 @@ export type renderHandlerMarkdownType = {
   h5: (content: string) => ReactNode;
   h6: (content: string) => ReactNode;
   code: (language: string, code: string) => ReactNode;
+  hr: () => ReactNode;
+  image: (description: string, link: string) => ReactNode;
   specialTable: (key: string, value: string) => ReactNode;
   list: (completeList: string) => ReactNode;
   table: (tbody: string, thead: string) => ReactNode;
