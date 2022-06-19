@@ -90,8 +90,8 @@ const App = () => {
       setFiles(data.files);
       setDocs(data.docs);
 
-      const firstItemFromDoc = `${docs?.[0]?.title}${docs?.[0]?.docs?.[0]?.title}`;
-
+      const firstItemFromDoc = `${data?.docs?.[0]?.title}${data?.docs?.[0]?.docs?.[0]?.title}`;
+      console.log(firstItemFromDoc);
       setTestSelected({
         tests: [],
         indexSelected: firstItemFromDoc,
