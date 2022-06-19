@@ -7,15 +7,78 @@ import { renderAllTests } from './components/widgets/renderAllTests';
 import { TestSelectedContext } from './core/contexts/testSelectedProvider';
 import { ThemeContext } from './core/contexts/themProvider';
 import { useFetchDocumentation } from './core/hooks/useFetchDocumentation';
-import { apiResponseFileTypes } from './core/interfaces/api';
+import { apiDocsType, apiResponseFileTypes, docItemType } from './core/interfaces/api';
 import Logo from './assets/logo.png';
 import { InterpreterMarkdown } from './components/interpreterMarkdown';
 import { reInterpreterDefault } from './core/handlers/default/reInterpreter';
 import { renderHandlerMarkdownDocbytest } from './core/handlers/docbytest/renderHtmlMarkdow';
 
+const RenderDocs = ({ docs }: { docs: apiDocsType[] }) => {
+  const { testSelected } = useContext(TestSelectedContext);
+
+  function renderItems() {
+    return docs.map((doc: apiDocsType) => {
+      const folderDocNotHasSelected = !testSelected.indexSelected.startsWith(doc.title);
+      if (folderDocNotHasSelected) {
+        return null;
+      }
+
+      return doc.docs.map((docItem: docItemType) => {
+        const docNotHasSelected = !testSelected.indexSelected.endsWith(docItem.title);
+        if (docNotHasSelected) {
+          return null;
+        }
+        return (
+          <InterpreterMarkdown
+            text={docItem.text}
+            reInterpreter={reInterpreterDefault}
+            renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
+          />
+        );
+      });
+    });
+  }
+
+  return <>{renderItems()}</>;
+};
+
+const GroupDocs = ({ docs }: { docs: apiDocsType[] }) => {
+  const { testSelected, setTestSelected } = useContext(TestSelectedContext);
+
+  function renderItems() {
+    return docs.map((doc: apiDocsType) => {
+      return (
+        <SidebarBaseMenu title={doc.title}>
+          {doc.docs.map((docItem: docItemType) => {
+            const indexTitleAndTest = `${doc.title}${docItem.title}`;
+            return (
+              <SidebarBaseItemMenu
+                isSelected={testSelected.indexSelected === indexTitleAndTest}
+                onClick={() =>
+                  setTestSelected({
+                    tests: [],
+                    indexSelected: indexTitleAndTest,
+                    titleBase: '',
+                    descriptionBase: '',
+                  })
+                }
+                localMethod="docs"
+                title={docItem.title}
+                method=""
+              />
+            );
+          })}
+        </SidebarBaseMenu>
+      );
+    });
+  }
+
+  return <>{renderItems()}</>;
+};
+
 const App = () => {
   const [files, setFiles] = useState<apiResponseFileTypes[]>([]);
-  const [docs, setDocs] = useState<string>('');
+  const [docs, setDocs] = useState<apiDocsType[]>([]);
   const { testSelected, setTestSelected } = useContext(TestSelectedContext);
   const [filter, setFilter] = useState<string>('');
   const { data } = useFetchDocumentation();
@@ -26,6 +89,15 @@ const App = () => {
     if (data) {
       setFiles(data.files);
       setDocs(data.docs);
+
+      const firstItemFromDoc = `${docs?.[0]?.title}${docs?.[0]?.docs?.[0]?.title}`;
+
+      setTestSelected({
+        tests: [],
+        indexSelected: firstItemFromDoc,
+        titleBase: '',
+        descriptionBase: '',
+      });
     }
   }, [data]);
 
@@ -101,22 +173,7 @@ const App = () => {
               height: 'calc(100vh - 8rem)',
             }}>
             <div className="flex flex-col px-2">
-              <SidebarBaseMenu title="🚀 Getting Started">
-                <SidebarBaseItemMenu
-                  isSelected={testSelected.indexSelected === 'readme'}
-                  onClick={() =>
-                    setTestSelected({
-                      tests: [],
-                      indexSelected: `readme`,
-                      titleBase: '',
-                      descriptionBase: '',
-                    })
-                  }
-                  localMethod="introduction"
-                  title="🧑‍💻 Introduction"
-                  method=""
-                />
-              </SidebarBaseMenu>
+              <GroupDocs docs={docs} />
 
               <GroupSuits files={files} filter={filter} />
             </div>
@@ -128,13 +185,7 @@ const App = () => {
             style={{
               height: 'calc(100vh - 3.5rem)',
             }}>
-            {notExistsSelectedTests ? (
-              <InterpreterMarkdown
-                text={docs}
-                reInterpreter={reInterpreterDefault}
-                renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
-              />
-            ) : null}
+            {notExistsSelectedTests ? <RenderDocs docs={docs} /> : null}
             {renderAllTests(testSelected?.tests ?? [], testSelected.titleBase, testSelected.descriptionBase)}
           </div>
         </main>

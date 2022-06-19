@@ -36,7 +36,19 @@ export type apiResponseFileTypes = {
   title: string;
 };
 
+export type docItemType = {
+  title: string;
+  order: number;
+  text: string;
+};
+
+export type apiDocsType = {
+  title: string;
+  order: number;
+  docs: docItemType[];
+};
+
 export type apiResponseDocType = {
   files: apiResponseFileTypes[];
-  docs: string;
+  docs: apiDocsType[];
 };

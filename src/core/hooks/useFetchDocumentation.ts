@@ -7,7 +7,7 @@ export const useFetchDocumentation = () => {
   const [error, setError] = useState<string>('');
   const { currentUrlAPi } = useGetUrlApi();
   const [data, setData] = useState<apiResponseDocType>({
-    docs: '',
+    docs: [],
     files: [],
   });
 

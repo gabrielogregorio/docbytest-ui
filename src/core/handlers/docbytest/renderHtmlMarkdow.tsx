@@ -146,7 +146,7 @@ export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
 
     return (
       <div className={`${backgroundColor} py-4`}>
-        <h4 className={`uppercase text-lg font-bold ${titleColor}`}>{extractUrls(title)} aaa</h4>
+        <h4 className={`uppercase text-lg font-bold ${titleColor}`}>{extractUrls(title)}</h4>
         {linesComment.map((lineComment) => {
           return (
             <p className={` text-lg font-base ${textColor} pt-2`}>
