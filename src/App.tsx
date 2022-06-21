@@ -86,12 +86,15 @@ const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    setMenuIsOpen(false);
+  }, [testSelected.indexSelected]);
+
+  useEffect(() => {
     if (data) {
       setFiles(data.files);
       setDocs(data.docs);
 
       const firstItemFromDoc = `${data?.docs?.[0]?.title}${data?.docs?.[0]?.docs?.[0]?.title}`;
-      console.log(firstItemFromDoc);
       setTestSelected({
         tests: [],
         indexSelected: firstItemFromDoc,
@@ -151,12 +154,14 @@ const App = () => {
         </header>
       </nav>
 
-      <div className="grid grid-cols-12 w-full overflow-hidden max-h-screen bg-white dark:bg-gray-900 dark:text-white relative">
+      <div
+        style={{ height: 'calc(100vh - 3.5rem)' }}
+        className="grid grid-cols-12 w-full overflow-hidden bg-white dark:bg-dark dark:text-white relative">
         <aside
-          className={`absolute top-0  ${
-            menuIsOpen ? 'w-full sm:w-80 lg:w-full' : 'w-0 lg:w-full'
-          } z-20 left-0 lg:relative lg:block lg:col-span-3  bg-white dark:bg-gray-900`}>
-          <div className="flex items-center border-b-2 border-b-gray-200 dark:border-b-gray-600 p-2 m-2 dark:hover:border-b-cyan-500 hover:border-b-cyan-500 transition duration-150">
+          className={`absolute top-0 ${
+            menuIsOpen ? 'w-full sm:w-80 lg:w-full' : 'hidden lg:block lg:w-full'
+          } z-20 left-0 lg:relative lg:block lg:col-span-3 h-full overflow-y-auto bg-white dark:bg-dark`}>
+          <div className="flex items-center border-b-2 border-b-gray-200 dark:border-b-gray-600 m-2 mx-4 dark:hover:border-b-cyan-500 hover:border-b-cyan-500 transition duration-150">
             <input
               type="search"
               name="searchRequests"
@@ -164,14 +169,10 @@ const App = () => {
               onChange={(event) => setFilter(event.target.value)}
               id="searchRequests"
               placeholder="Pesquise endpoints, textos..."
-              className="w-full text-gray-500 focus:outline-none dark:bg-gray-900"
+              className="w-full text-gray-500 focus:outline-none dark:bg-dark p-2 "
             />
           </div>
-          <div
-            className="overflow-y-auto"
-            style={{
-              height: 'calc(100vh - 8rem)',
-            }}>
+          <div className="overflow-y-auto">
             <div className="flex flex-col px-2">
               <GroupDocs docs={docs} />
 

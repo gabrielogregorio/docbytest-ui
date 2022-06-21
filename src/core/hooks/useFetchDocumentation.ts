@@ -5,7 +5,7 @@ import { useGetUrlApi } from './useGetUrlApi';
 export const useFetchDocumentation = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const { currentUrlAPi } = useGetUrlApi();
+  const { currentUrlOrigin } = useGetUrlApi();
   const [data, setData] = useState<apiResponseDocType>({
     docs: [],
     files: [],
@@ -13,7 +13,7 @@ export const useFetchDocumentation = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`${currentUrlAPi}-json`)
+    fetch(`${currentUrlOrigin}/docs-json`)
       .then((res) => res.json())
       .then((dataApi) => {
         setData(dataApi);
