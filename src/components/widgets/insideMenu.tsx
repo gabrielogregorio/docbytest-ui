@@ -3,10 +3,10 @@ import { ReactNode } from 'react';
 type insideMenu = {
   onClick: any;
   isSelected: boolean;
-  text: string;
+  text: number;
 };
 
-const isNumberAndStatusCode = (statusCode: string): ReactNode => {
+const isNumberAndStatusCode = (statusCode: number): ReactNode => {
   const statusCodeNumber: number = Number(statusCode);
   const optionsStatusCode: { [key: number | string]: string } = {
     200: '🆗',
@@ -42,7 +42,7 @@ export const InsideMenu = ({ onClick, isSelected, text }: insideMenu) => {
   return (
     <button
       type="button"
-      title={text}
+      title={text?.toString()}
       onClick={() => onClick()}
       className={`p-2 py-1.5 flex justify-center items-center group ${styleIsCaseSelected} hover:border-b-cyan-500`}>
       <div className="py-2 px-3">

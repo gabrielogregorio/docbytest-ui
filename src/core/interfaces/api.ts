@@ -17,7 +17,7 @@ export type testsType = {
   fullPath: string;
   headers: any;
   response: {
-    statusCode: string;
+    statusCode: number;
     body: any;
   };
 };
