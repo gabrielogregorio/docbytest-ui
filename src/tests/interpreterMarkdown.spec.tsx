@@ -18,10 +18,7 @@ test('Interpreter Markdown', () => {
     ##### API subtitle 5
     ###### API subtitle 6
     
-    > danger # 💡 O que é o docbytest
-    > O [docbytest](https://github.com/gabrielogregorio/docbytest) é o projeto usado.
-    
-    Está documentação
+    Está documentação 
     
     \`\`\`typescript
     import os
@@ -50,13 +47,7 @@ test('Interpreter Markdown', () => {
   expect(screen.getByTestId('title-h5').textContent).toEqual('API subtitle 5');
   expect(screen.getByTestId('title-h6').textContent).toEqual('API subtitle 6');
 
-  expect(screen.getByTestId('comment-type').textContent).toEqual('danger');
-  expect(screen.getByTestId('comment-title').textContent).toEqual('💡 O que é o docbytest');
-  expect(screen.getByTestId('comment-content').textContent).toEqual(
-    'O [docbytest](https://github.com/gabrielogregorio/docbytest) é o projeto usado.',
-  );
-
-  expect(screen.getByTestId('paragraph').textContent).toEqual('Está documentação');
+  expect(screen.getAllByTestId('paragraph')[0].textContent).toEqual('Está documentação');
   expect(screen.getByTestId('code').textContent).toEqual(`typescript - import os\n    print(os.system(''));`);
   expect(screen.getByTestId('special').textContent).toEqual('Tabelá de erros - errors_status_table');
   expect(screen.getByTestId('completeList').textContent).toEqual('* item2\n    * item1');
