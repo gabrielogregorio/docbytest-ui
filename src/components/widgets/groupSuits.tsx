@@ -44,7 +44,7 @@ export const GroupSuits = ({ files, filter }: { files: apiResponseFileTypes[]; f
             !normalizeStrings(file.description).includes(filterNormalized);
 
           if (existsFilter && notExistsMatchFilterInRouterOrTexts) {
-            console.log('ingore filter');
+            //
           } else {
             listBase.push({
               tests,
