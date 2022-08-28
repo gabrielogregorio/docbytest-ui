@@ -13,8 +13,7 @@ export const GroupExplainedParams = ({ params, title }: { params: paramsType[]; 
           return (
             <div className="bg-white p-3">
               <div>
-                <span className="font-bold">{queryParam.tag}</span> <span className="">{queryParam.type}</span>{' '}
-                {queryParam.required ? <span className="text-red-500">required</span> : null}
+                <span className="font-bold">{queryParam.name}</span> <span className="">{queryParam.type}</span>{' '}
               </div>
               <p>any</p>
             </div>

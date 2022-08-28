@@ -1,28 +1,34 @@
+export enum parametersInEnum {
+  query = 'query',
+  param = 'param',
+}
+export type parametersExampleType = string | number | boolean;
+
 export type paramsType = {
-  tag: string;
+  in: parametersInEnum;
+  name: string;
+  example: parametersExampleType;
   variable: string;
-  in: string;
-  required: null;
   type: string;
-  example: string;
 };
+
+export type contentRequestType = string | number | boolean | object;
 
 export type testsType = {
   method: string;
-  sendContent: any;
-  params: paramsType[];
+  sendContent: contentRequestType;
+  parameters: paramsType[];
   title: string;
   description: string;
-  router: string;
-  fullPath: string;
-  headers: any;
+  path: string;
+  headers: contentRequestType;
   response: {
     statusCode: number;
-    body: any;
+    body: contentRequestType;
   };
 };
 
-export type testBaseObjectType = { tests: testsType[] };
+export type testBaseObjectType = testsType[];
 
 export type pathOnePathType = {
   [method: string]: testBaseObjectType;
@@ -49,6 +55,6 @@ export type apiDocsType = {
 };
 
 export type apiResponseDocType = {
-  files: apiResponseFileTypes[];
+  suites: apiResponseFileTypes[];
   docs: apiDocsType[];
 };

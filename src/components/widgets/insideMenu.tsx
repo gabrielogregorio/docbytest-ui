@@ -50,8 +50,6 @@ export const InsideMenu = ({ onClick, isSelected, text }: insideMenu) => {
           <span>{isNumberAndStatusCode(text)}</span>
         </div>
       </div>
-
-      {/* <td className="py-2 px-2 whitespace-nowrap select-none">{test?.title}</td> */}
     </button>
   );
 };

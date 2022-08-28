@@ -9,22 +9,23 @@ type renderTestsType = {
 };
 
 export const RenderTests = ({ tests, testRunner, setTestRunner }: renderTestsType) => {
-  function renderTests() {
-    return tests.map((test: testsType, index: number) => {
-      return (
-        <InsideMenu
-          isSelected={testRunner.caseSelected === index}
-          text={test?.response?.statusCode}
-          onClick={() =>
-            setTestRunner({
-              ...test,
-              caseSelected: index,
-            })
-          }
-        />
-      );
-    });
-  }
-
-  return <div className="flex overflow-auto">{renderTests()}</div>;
+  return (
+    <div className="flex overflow-auto">
+      {tests.map((test: testsType, index: number) => {
+        return (
+          <InsideMenu
+            key={`${test.description}-${test.title}-${test.path}`}
+            isSelected={testRunner.caseSelected === index}
+            text={test?.response?.statusCode}
+            onClick={() =>
+              setTestRunner({
+                ...test,
+                caseSelected: index,
+              })
+            }
+          />
+        );
+      })}
+    </div>
+  );
 };

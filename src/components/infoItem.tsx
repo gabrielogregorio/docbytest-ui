@@ -20,7 +20,7 @@ const dataBadge: badgeType = {
   default: { text: 'hover:text-gray-600 hover:dark:text-gray-300' },
 };
 
-export const SidebarBaseItemMenu = ({
+export const InfoItem = ({
   isSelected,
   onClick,
   localMethod,
@@ -34,13 +34,13 @@ export const SidebarBaseItemMenu = ({
   method: string;
 }) => {
   const { text } = dataBadge?.[method] ?? dataBadge.default;
-
+  const isSelectedStyle = isSelected ? 'dark:bg-gray-800 bg-gray-100' : '';
   return (
     <div>
-      <div className={`text-gray-700 p-1.5  ${isSelected ? 'dark:bg-gray-800 bg-gray-100' : ''}`}>
+      <div className={`text-gray-700 p-1.5  ${isSelectedStyle}`}>
         <button type="button" onClick={() => onClick()} className=" flex w-full cursor-pointer text-left">
           <div className="flex items-center flex-1">
-            {localMethod ? <BadgeMethod method={localMethod} /> : null}
+            <BadgeMethod method={localMethod} />
             <p
               className={`ml-2 flex-1 select-none overflow-hidden text-ellipsis dark:text-gray-200 text-gray-600 capitalize ${text}`}>
               {title}

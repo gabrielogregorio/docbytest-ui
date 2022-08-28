@@ -31,6 +31,10 @@ export const dataBadge: badgeType = {
 };
 
 export const BadgeMethod = ({ method, onlyText }: { method: string; onlyText?: boolean }) => {
+  if (!method) {
+    return <div />;
+  }
+
   const { title, bg, border } = dataBadge?.[method] ?? dataBadge.default;
 
   return <div className={`select-none ${bg} ${onlyText ? '' : border} px-2 text-sm w-14 text-left`}>{title}</div>;

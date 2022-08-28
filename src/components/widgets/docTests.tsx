@@ -1,17 +1,24 @@
-import { useEffect, useState } from 'react';
-import { reInterpreterDefault } from '../../core/handlers/default/reInterpreter';
-import { renderHandlerMarkdownDocbytest } from '../../core/handlers/docbytest/renderHtmlMarkdow';
+import { useContext, useEffect, useState } from 'react';
+import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
+import { reInterpreterDefault } from '../../core/handlers/reInterpreter';
+import { renderHandlerMarkdownDocbytest } from '../../core/handlers/renderHtmlMarkdow';
 import { InterpreterMarkdown } from '../interpreterMarkdown';
 import { BadgeMethod } from './badgeMethod';
-import { useGetUrlApi } from '../../core/hooks/useGetUrlApi';
+import { getUrlApi } from '../../core/hooks/getUrlApi';
 import { testsType } from '../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 import { InputParam } from './inputParam';
 import { RenderTests } from './renderTests';
 import { TestRunnerModal } from './testRunnerModal';
 
-export function renderAllTests(tests: testsType[], titleBase: string, descriptionBase: string) {
-  const { currentUrlOrigin } = useGetUrlApi();
+export const DocTests = () => {
+  const { testSelected } = useContext(TestSelectedContext);
+
+  const tests: testsType[] = testSelected?.tests;
+  const { titleBase } = testSelected;
+  const { descriptionBase } = testSelected;
+
+  const { currentUrlOrigin } = getUrlApi();
   const [testRunner, setTestRunner] = useState<InitialTestRunnerType>({
     ...tests?.[0],
     caseSelected: 0,
@@ -41,14 +48,18 @@ export function renderAllTests(tests: testsType[], titleBase: string, descriptio
               renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
             />
           ) : null}
+
           <span className="border-b-2 block" />
+
           <InputParam
             label={<BadgeMethod onlyText method={testRunner?.method} />}
             name="auth"
             type="text"
-            value={`${currentUrlOrigin}${testRunner?.router}`}
+            value={`${currentUrlOrigin}${testRunner?.path}`}
           />
+
           <RenderTests tests={tests} testRunner={testRunner} setTestRunner={setTestRunner} />
+
           {testRunner.title ? (
             <h2 className="uppercase dark:text-gray-200 text-gray-600 font-bold text-lg mt-2">{testRunner.title}</h2>
           ) : null}
@@ -60,9 +71,10 @@ export function renderAllTests(tests: testsType[], titleBase: string, descriptio
               renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
             />
           ) : null}
+
           {testRunner.method ? <TestRunnerModal testRunner={testRunner} /> : null}
         </>
       ) : null}
     </div>
   );
-}
+};

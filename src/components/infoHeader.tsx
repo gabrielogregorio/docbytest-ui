@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export const SidebarBaseMenu = ({ title, children }: { children: ReactNode; title: string }) => {
+export const InfoHeader = ({ title, children }: { children: ReactNode; title: string }) => {
   return (
     <div className="flex flex-col p-2">
       <div className="flex justify-center">
