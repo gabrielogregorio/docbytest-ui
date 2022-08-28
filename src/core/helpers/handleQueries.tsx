@@ -1,4 +1,4 @@
-import { useGetUrlApi } from '../hooks/useGetUrlApi';
+import { getUrlApi } from '../hooks/getUrlApi';
 import { paramsType } from '../interfaces/api';
 
 export const mountUrlParams = (urlParams: paramsType[]) => {
@@ -59,7 +59,7 @@ export const mountCurlRequest = ({
   mountQuery,
   mountHeaders,
 }: mountCurlRequestType) => {
-  const { currentUrlOrigin } = useGetUrlApi();
+  const { currentUrlOrigin } = getUrlApi();
   const sendContentMounted = `'${JSON.stringify(sendContent, null, 2).replaceAll("'", '"')}'`;
   const linkRequest = `${currentUrlOrigin}${path}/${mountParams || ''}${
     mountQuery.slice(0, mountQuery.length - 1) || ''

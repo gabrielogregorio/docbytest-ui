@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { generateIds } from '../shared/generateIds';
-import { useGetUrlApi } from '../hooks/useGetUrlApi';
+import { getUrlApi } from '../hooks/getUrlApi';
 import { BoardViewer } from '../../components/widgets/boardViewer';
 import { commentColors } from '../helpers/colors';
 import { renderHandlerMarkdownType } from '../interfaces/interpreter';
@@ -47,7 +47,7 @@ const extractUrls = (listAllOccurrence: any) => {
   });
 };
 
-const { currentUrlOrigin } = useGetUrlApi();
+const { currentUrlOrigin } = getUrlApi();
 
 export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
   base: (children: ReactNode) => {

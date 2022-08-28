@@ -4,7 +4,7 @@ import { reInterpreterDefault } from '../../core/handlers/reInterpreter';
 import { renderHandlerMarkdownDocbytest } from '../../core/handlers/renderHtmlMarkdow';
 import { InterpreterMarkdown } from '../interpreterMarkdown';
 import { BadgeMethod } from './badgeMethod';
-import { useGetUrlApi } from '../../core/hooks/useGetUrlApi';
+import { getUrlApi } from '../../core/hooks/getUrlApi';
 import { testsType } from '../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 import { InputParam } from './inputParam';
@@ -18,7 +18,7 @@ export const DocTests = () => {
   const { titleBase } = testSelected;
   const { descriptionBase } = testSelected;
 
-  const { currentUrlOrigin } = useGetUrlApi();
+  const { currentUrlOrigin } = getUrlApi();
   const [testRunner, setTestRunner] = useState<InitialTestRunnerType>({
     ...tests?.[0],
     caseSelected: 0,

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../contexts/dataProvider';
-import { useGetUrlApi } from './useGetUrlApi';
+import { getUrlApi } from './getUrlApi';
 
 export const useFetchDocsAndSaveContext = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const { currentUrlOrigin } = useGetUrlApi();
+  const { currentUrlOrigin } = getUrlApi();
   const { setData } = useContext(DataContext);
 
   useEffect(() => {
