@@ -38,8 +38,8 @@ const mountCurlRequestOrchestrator = (
 };
 
 export const TestRunnerModal = ({ testRunner }: { testRunner: InitialTestRunnerType }) => {
-  const queryParams = testRunner?.params?.filter((item: paramsType) => item.in === 'query');
-  const urlParams = testRunner?.params?.filter((item: paramsType) => item.in === 'param');
+  const queryParams = testRunner?.parameters?.filter((item: paramsType) => item.in === 'query');
+  const urlParams = testRunner?.parameters?.filter((item: paramsType) => item.in === 'param');
   const { headers, method, fullPath, sendContent } = testRunner ?? {};
   const [body, setBody] = useState<string>('');
   const [response, setResponse] = useState<string>('');

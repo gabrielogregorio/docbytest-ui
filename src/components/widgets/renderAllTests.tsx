@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
 import { reInterpreterDefault } from '../../core/handlers/default/reInterpreter';
 import { renderHandlerMarkdownDocbytest } from '../../core/handlers/docbytest/renderHtmlMarkdow';
 import { InterpreterMarkdown } from '../interpreterMarkdown';
@@ -10,7 +11,13 @@ import { InputParam } from './inputParam';
 import { RenderTests } from './renderTests';
 import { TestRunnerModal } from './testRunnerModal';
 
-export function renderAllTests(tests: testsType[], titleBase: string, descriptionBase: string) {
+export const RenderAllTests = () => {
+  const { testSelected } = useContext(TestSelectedContext);
+
+  const tests: testsType[] = testSelected?.tests;
+  const { titleBase } = testSelected;
+  const { descriptionBase } = testSelected;
+
   const { currentUrlOrigin } = useGetUrlApi();
   const [testRunner, setTestRunner] = useState<InitialTestRunnerType>({
     ...tests?.[0],
@@ -65,4 +72,4 @@ export function renderAllTests(tests: testsType[], titleBase: string, descriptio
       ) : null}
     </div>
   );
-}
+};

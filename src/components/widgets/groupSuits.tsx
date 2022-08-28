@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { DataContext } from '../../core/contexts/dataProvider';
 import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
 import { sortTestByStatusCode } from '../../core/helpers/sortTestByStatusCode';
 import { apiResponseFileTypes, testBaseObjectType, testsType } from '../../core/interfaces/api';
@@ -15,11 +16,12 @@ type listBaseType = {
   method: string;
 };
 
-export const GroupSuits = ({ files, filter }: { files: apiResponseFileTypes[]; filter: string }) => {
+export const GroupSuits = ({ filter }: { filter: string }) => {
   const { testSelected } = useContext(TestSelectedContext);
+  const { suites } = useContext(DataContext);
 
   function renderSuits() {
-    return files.map((file: apiResponseFileTypes) => {
+    return suites?.map((file: apiResponseFileTypes) => {
       const keysPaths = Object.keys(file.paths);
       const listBase: listBaseType[] = [];
 
@@ -27,8 +29,7 @@ export const GroupSuits = ({ files, filter }: { files: apiResponseFileTypes[]; f
         const methods = Object.keys(file.paths[path]);
 
         methods.forEach((method: string, indexMethod: number) => {
-          const { tests }: testBaseObjectType = file.paths[path][method];
-
+          const tests: testBaseObjectType = file.paths[path][method];
           const testsSorted = sortTestByStatusCode(tests);
 
           const { method: localMethod, title, router, description } = testsSorted[0] ?? {};
@@ -59,7 +60,7 @@ export const GroupSuits = ({ files, filter }: { files: apiResponseFileTypes[]; f
         });
       });
 
-      return <GroupCases listBase={listBase} title={file.title} description={file.description} />;
+      return <GroupCases listBase={listBase} title={file.title} key={file.title} description={file.description} />;
     });
   }
 

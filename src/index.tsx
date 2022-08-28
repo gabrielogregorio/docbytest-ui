@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { DataProvider } from './core/contexts/dataProvider';
 import { MenuProvider } from './core/contexts/menuProvider';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -14,11 +15,13 @@ root.render(
     <TestSelectedProvider>
       <ThemeProvider>
         <MenuProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/docs" element={<App />} />
-            </Routes>
-          </BrowserRouter>
+          <DataProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/docs" element={<App />} />
+              </Routes>
+            </BrowserRouter>
+          </DataProvider>
         </MenuProvider>
       </ThemeProvider>
     </TestSelectedProvider>

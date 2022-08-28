@@ -1,15 +1,12 @@
-import { useEffect, useState } from 'react';
-import { apiResponseDocType } from '../interfaces/api';
+import { useContext, useEffect, useState } from 'react';
+import { DataContext } from '../contexts/dataProvider';
 import { useGetUrlApi } from './useGetUrlApi';
 
-export const useFetchDocumentation = () => {
+export const useFetchDocsAndSaveContext = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const { currentUrlOrigin } = useGetUrlApi();
-  const [data, setData] = useState<apiResponseDocType>({
-    docs: [],
-    files: [],
-  });
+  const { setData } = useContext(DataContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,7 +24,6 @@ export const useFetchDocumentation = () => {
   }, []);
 
   return {
-    data,
     error,
     isLoading,
   };

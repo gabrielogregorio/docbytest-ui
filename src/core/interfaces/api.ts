@@ -10,7 +10,7 @@ export type paramsType = {
 export type testsType = {
   method: string;
   sendContent: any;
-  params: paramsType[];
+  parameters: paramsType[];
   title: string;
   description: string;
   router: string;
@@ -22,7 +22,7 @@ export type testsType = {
   };
 };
 
-export type testBaseObjectType = { tests: testsType[] };
+export type testBaseObjectType = testsType[];
 
 export type pathOnePathType = {
   [method: string]: testBaseObjectType;
@@ -49,6 +49,6 @@ export type apiDocsType = {
 };
 
 export type apiResponseDocType = {
-  files: apiResponseFileTypes[];
+  suites: apiResponseFileTypes[];
   docs: apiDocsType[];
 };

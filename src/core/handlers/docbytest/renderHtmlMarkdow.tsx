@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { generateIds } from '../../shared/generateIds';
 import { useGetUrlApi } from '../../hooks/useGetUrlApi';
 import { BoardViewer } from '../../../components/widgets/boardViewer';
 import { commentColors } from '../../helpers/colors';
@@ -13,12 +14,12 @@ const extractBolder = (listAllOccurrence: any) => {
     const data = isLinkable.exec(item);
     if (data) {
       return (
-        <span title={data[1]} className="font-bold">
+        <span key={generateIds()} title={data[1]} className="font-bold">
           {data[1].slice(2, data[1].length - 2)}
         </span>
       );
     }
-    return <span>{item}</span>;
+    return <span key={generateIds()}>{item}</span>;
   });
 };
 
@@ -32,6 +33,7 @@ const extractUrls = (listAllOccurrence: any) => {
     if (data) {
       return (
         <a
+          key={generateIds()}
           title={data[2]}
           target="_blank"
           className="text-blue-500 dark:text-blue-400 hover:underline"
@@ -41,7 +43,7 @@ const extractUrls = (listAllOccurrence: any) => {
         </a>
       );
     }
-    return <span>{extractBolder(item)}</span>;
+    return <span key={generateIds()}>{extractBolder(item)}</span>;
   });
 };
 
@@ -49,25 +51,41 @@ const { currentUrlOrigin } = useGetUrlApi();
 
 export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
   base: (children: ReactNode) => {
-    return <div className="px-4">{children}</div>;
+    return (
+      <div key={generateIds()} className="px-4">
+        {children}
+      </div>
+    );
   },
   h1: (content: string) => (
-    <h1 className="text-5xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-6">{content.trim()}</h1>
+    <h1 key={generateIds()} className="text-5xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-6">
+      {content.trim()}
+    </h1>
   ),
   h2: (content: string) => (
-    <h2 className="text-4xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-6">{content.trim()}</h2>
+    <h2 key={generateIds()} className="text-4xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-6">
+      {content.trim()}
+    </h2>
   ),
   h3: (content: string) => (
-    <h3 className="text-3xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-5">{content.trim()}</h3>
+    <h3 key={generateIds()} className="text-3xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-5">
+      {content.trim()}
+    </h3>
   ),
   h4: (content: string) => (
-    <h4 className="text-2xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-4">{content.trim()}</h4>
+    <h4 key={generateIds()} className="text-2xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-4">
+      {content.trim()}
+    </h4>
   ),
   h5: (content: string) => (
-    <h5 className="text-xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-3">{content.trim()}</h5>
+    <h5 key={generateIds()} className="text-xl font-bold dark:text-gray-100 text-gray-700 mb-3 my-3">
+      {content.trim()}
+    </h5>
   ),
   h6: (content: string) => (
-    <h6 className="text-sm font-bold dark:text-gray-100 text-gray-700 mb-3 my-2">{content.trim()}</h6>
+    <h6 key={generateIds()} className="text-sm font-bold dark:text-gray-100 text-gray-700 mb-3 my-2">
+      {content.trim()}
+    </h6>
   ),
   code: (language: string, code: string) => {
     const isJson = language === 'json';
@@ -90,7 +108,7 @@ export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
             return null;
           }
           const removeStart = itemList.replace(/\s{0,10}[\\*•]\s{0,10}/, '');
-          return <li>{extractUrls(removeStart)}</li>;
+          return <li key={generateIds()}>{extractUrls(removeStart)}</li>;
         })}
       </ul>
     );
@@ -105,7 +123,9 @@ export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
                 return null;
               }
               return (
-                <th className="py-2 border-b border-b-gray-300 dark:border-b-gray-700 text-left px-6">
+                <th
+                  key={generateIds()}
+                  className="py-2 border-b border-b-gray-300 dark:border-b-gray-700 text-left px-6">
                   {extractUrls(rowTable)}
                 </th>
               );
@@ -117,12 +137,16 @@ export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
             const itemsColumnTable = rowTable.split('|');
 
             return (
-              <tr>
+              <tr key={generateIds()}>
                 {itemsColumnTable.map((itemColumnTable: string) => {
                   if (!itemColumnTable) {
                     return null;
                   }
-                  return <td className="font-bold px-6 py-2">{extractUrls(itemColumnTable)}</td>;
+                  return (
+                    <td key={generateIds()} className="font-bold px-6 py-2">
+                      {extractUrls(itemColumnTable)}
+                    </td>
+                  );
                 })}
               </tr>
             );
@@ -149,7 +173,7 @@ export const renderHandlerMarkdownDocbytest: renderHandlerMarkdownType = {
         <h4 className={`uppercase text-lg font-bold ${titleColor}`}>{extractUrls(title)}</h4>
         {linesComment.map((lineComment) => {
           return (
-            <p className={` text-lg font-base ${textColor} pt-2`}>
+            <p key={generateIds()} className={` text-lg font-base ${textColor} pt-2`}>
               {extractUrls(removeSpecialCharacters(lineComment))}
             </p>
           );

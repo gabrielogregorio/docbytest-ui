@@ -13,6 +13,7 @@ export const RenderTests = ({ tests, testRunner, setTestRunner }: renderTestsTyp
     return tests.map((test: testsType, index: number) => {
       return (
         <InsideMenu
+          key={`${test.description}-${test.title}-${test.fullPath}`}
           isSelected={testRunner.caseSelected === index}
           text={test?.response?.statusCode}
           onClick={() =>

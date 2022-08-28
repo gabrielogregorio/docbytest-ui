@@ -25,6 +25,7 @@ export const GroupCases = ({ listBase, title: titleBase, description: descriptio
     return listBase.map(({ tests, isSelected, indexPath, indexMethod, localMethod, title, method }) => {
       return (
         <SidebarBaseItemMenu
+          key={title}
           isSelected={isSelected}
           onClick={() =>
             setTestSelected({
@@ -46,5 +47,9 @@ export const GroupCases = ({ listBase, title: titleBase, description: descriptio
     return null;
   }
 
-  return <SidebarBaseMenu title={titleBase}>{renderCases()}</SidebarBaseMenu>;
+  return (
+    <SidebarBaseMenu key={titleBase} title={titleBase}>
+      {renderCases()}
+    </SidebarBaseMenu>
+  );
 };
