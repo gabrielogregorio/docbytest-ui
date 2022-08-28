@@ -13,7 +13,7 @@ export const mountUrlParams = (urlParams: paramsType[]) => {
 export const mountQueryParams = (queryParams: paramsType[]) => {
   let mountParams = '?';
   queryParams.forEach((url) => {
-    mountParams += `${url.tag}=${url.example}&`;
+    mountParams += `${url.name}=${url.example}&`;
   });
 
   return mountParams;

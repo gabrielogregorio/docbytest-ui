@@ -48,14 +48,18 @@ export const DocTests = () => {
               renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
             />
           ) : null}
+
           <span className="border-b-2 block" />
+
           <InputParam
             label={<BadgeMethod onlyText method={testRunner?.method} />}
             name="auth"
             type="text"
-            value={`${currentUrlOrigin}${testRunner?.router}`}
+            value={`${currentUrlOrigin}${testRunner?.path}`}
           />
+
           <RenderTests tests={tests} testRunner={testRunner} setTestRunner={setTestRunner} />
+
           {testRunner.title ? (
             <h2 className="uppercase dark:text-gray-200 text-gray-600 font-bold text-lg mt-2">{testRunner.title}</h2>
           ) : null}
@@ -67,6 +71,7 @@ export const DocTests = () => {
               renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
             />
           ) : null}
+
           {testRunner.method ? <TestRunnerModal testRunner={testRunner} /> : null}
         </>
       ) : null}

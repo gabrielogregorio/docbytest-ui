@@ -32,13 +32,12 @@ export const GroupSuits = ({ filter }: { filter: string }) => {
           const tests: testBaseObjectType = file.paths[path][method];
           const testsSorted = sortTestByStatusCode(tests);
 
-          const { method: localMethod, title, router, description } = testsSorted[0] ?? {};
+          const { method: localMethod, title, description } = testsSorted[0] ?? {};
           const isSelected = testSelected?.indexSelected === `${file.title}-${indexPath}-${indexMethod}`;
 
           const existsFilter = filter !== '';
           const filterNormalized = normalizeStrings(filter);
           const notExistsMatchFilterInRouterOrTexts =
-            !normalizeStrings(router).includes(filterNormalized) &&
             !normalizeStrings(description).includes(filterNormalized) &&
             !normalizeStrings(title).includes(filterNormalized) &&
             !normalizeStrings(file.title).includes(filterNormalized) &&

@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
+import { parametersExampleType } from '../../core/interfaces/api';
 import { CopyClipboard } from './copyClipboard';
 
 type inputParamType = {
   type: string;
   name: string;
-  value: string;
+  value: parametersExampleType;
   label: string | ReactNode;
 };
 
@@ -18,12 +19,12 @@ export const InputParam = ({ type, name, value, label }: inputParamType) => {
         <input
           type={type}
           name={name}
-          value={value}
+          value={value.toString()}
           disabled
           className="p-2 bg-transparent outline-none text-gray-200 flex-1"
         />
         <div className="flex items-center justify-center">
-          <CopyClipboard dataToCopy={value} />
+          <CopyClipboard dataToCopy={value.toString()} />
         </div>
       </label>
     </div>

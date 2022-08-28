@@ -8,16 +8,16 @@ import {
 } from '../../core/helpers/handleQueries';
 import { GroupInputHeaders } from './groupInputHeaders';
 import { BoardViewer } from './boardViewer';
-import { paramsType } from '../../core/interfaces/api';
+import { contentRequestType, paramsType } from '../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 
 const mountCurlRequestOrchestrator = (
   queryParams: paramsType[],
   urlParams: paramsType[],
-  headers: any,
+  headers: contentRequestType,
   method: string,
   path: string,
-  sendContent: string,
+  sendContent: contentRequestType,
 ) => {
   if (!method) {
     return '';
@@ -40,9 +40,9 @@ const mountCurlRequestOrchestrator = (
 export const TestRunnerModal = ({ testRunner }: { testRunner: InitialTestRunnerType }) => {
   const queryParams = testRunner?.parameters?.filter((item: paramsType) => item.in === 'query');
   const urlParams = testRunner?.parameters?.filter((item: paramsType) => item.in === 'param');
-  const { headers, method, fullPath, sendContent } = testRunner ?? {};
+  const { headers, method, path, sendContent } = testRunner ?? {};
   const [body, setBody] = useState<string>('');
-  const [response, setResponse] = useState<string>('');
+  const [response, setResponse] = useState<contentRequestType>('');
 
   useEffect(() => {
     if (testRunner?.response) {
@@ -53,7 +53,7 @@ export const TestRunnerModal = ({ testRunner }: { testRunner: InitialTestRunnerT
   }, [testRunner?.response]);
 
   useEffect(() => {
-    setBody(mountCurlRequestOrchestrator(queryParams, urlParams, headers, method, fullPath, sendContent));
+    setBody(mountCurlRequestOrchestrator(queryParams, urlParams, headers, method, path, sendContent));
   }, [testRunner]);
 
   return (
