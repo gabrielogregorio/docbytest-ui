@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { MenuProvider } from './core/contexts/menuProvider';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { TestSelectedProvider } from './core/contexts/testSelectedProvider';
@@ -12,11 +13,13 @@ root.render(
   <React.StrictMode>
     <TestSelectedProvider>
       <ThemeProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/docs" element={<App />} />
-          </Routes>
-        </BrowserRouter>
+        <MenuProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/docs" element={<App />} />
+            </Routes>
+          </BrowserRouter>
+        </MenuProvider>
       </ThemeProvider>
     </TestSelectedProvider>
   </React.StrictMode>,
