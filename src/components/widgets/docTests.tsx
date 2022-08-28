@@ -11,7 +11,7 @@ import { InputParam } from './inputParam';
 import { RenderTests } from './renderTests';
 import { TestRunnerModal } from './testRunnerModal';
 
-export const RenderAllTests = () => {
+export const DocTests = () => {
   const { testSelected } = useContext(TestSelectedContext);
 
   const tests: testsType[] = testSelected?.tests;

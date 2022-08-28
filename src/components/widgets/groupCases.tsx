@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
 import { testsType } from '../../core/interfaces/api';
-import { SidebarBaseItemMenu } from '../sidebarBaseItemMenu';
-import { SidebarBaseMenu } from '../sidebarBaseMenu';
+import { InfoItem } from '../infoItem';
+import { InfoHeader } from '../infoHeader';
 
 type groupCasesType = {
   title: string;
@@ -21,35 +21,31 @@ type groupCasesType = {
 export const GroupCases = ({ listBase, title: titleBase, description: descriptionBase }: groupCasesType) => {
   const { setTestSelected } = useContext(TestSelectedContext);
 
-  function renderCases() {
-    return listBase.map(({ tests, isSelected, indexPath, indexMethod, localMethod, title, method }) => {
-      return (
-        <SidebarBaseItemMenu
-          key={title}
-          isSelected={isSelected}
-          onClick={() =>
-            setTestSelected({
-              tests,
-              indexSelected: `${titleBase}-${indexPath}-${indexMethod}`,
-              titleBase,
-              descriptionBase,
-            })
-          }
-          localMethod={localMethod}
-          title={title}
-          method={method}
-        />
-      );
-    });
-  }
-
   if (listBase.length === 0) {
     return null;
   }
 
   return (
-    <SidebarBaseMenu key={titleBase} title={titleBase}>
-      {renderCases()}
-    </SidebarBaseMenu>
+    <InfoHeader key={titleBase} title={titleBase}>
+      {listBase.map(({ tests, isSelected, indexPath, indexMethod, localMethod, title, method }) => {
+        return (
+          <InfoItem
+            key={title}
+            isSelected={isSelected}
+            onClick={() =>
+              setTestSelected({
+                tests,
+                indexSelected: `${titleBase}-${indexPath}-${indexMethod}`,
+                titleBase,
+                descriptionBase,
+              })
+            }
+            localMethod={localMethod}
+            title={title}
+            method={method}
+          />
+        );
+      })}
+    </InfoHeader>
   );
 };

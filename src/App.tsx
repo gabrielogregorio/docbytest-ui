@@ -1,14 +1,13 @@
 import { useContext, useEffect } from 'react';
-import { RenderAside } from './components/widgets/renderAside';
-import { RenderDocs } from './components/widgets/renderDocs';
+import { Aside } from './components/widgets/aside';
+import { Docs } from './components/widgets/docs';
 import { DataContext } from './core/contexts/dataProvider';
 import { MenuContext } from './core/contexts/menuProvider';
 import { Header } from './components/layout/header';
 import { Container } from './components/layout/container';
-import { RenderAllTests } from './components/widgets/renderAllTests';
+import { DocTests } from './components/widgets/docTests';
 import { TestSelectedContext } from './core/contexts/testSelectedProvider';
 import { useFetchDocsAndSaveContext } from './core/hooks/useFetchDocsAndSaveContext';
-
 import { Main } from './components/layout/main';
 
 const App = () => {
@@ -42,10 +41,10 @@ const App = () => {
       <div
         style={{ height: 'calc(100vh - 3.5rem)' }}
         className="grid grid-cols-12 w-full overflow-hidden bg-white dark:bg-dark dark:text-white relative">
-        <RenderAside />
+        <Aside />
         <Main>
-          <RenderDocs />
-          <RenderAllTests />
+          <Docs />
+          <DocTests />
         </Main>
       </div>
     </Container>
