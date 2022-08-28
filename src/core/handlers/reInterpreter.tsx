@@ -1,4 +1,4 @@
-import { regexInterpreterType } from '../../interfaces/interpreter';
+import { regexInterpreterType } from '../interfaces/interpreter';
 
 export const reInterpreterDefault: regexInterpreterType = {
   isParagraph: /^(.{1,1000})\n/,

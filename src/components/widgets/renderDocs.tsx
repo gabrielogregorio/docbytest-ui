@@ -3,8 +3,8 @@ import { DataContext } from '../../core/contexts/dataProvider';
 import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
 import { apiDocsType, docItemType } from '../../core/interfaces/api';
 import { InterpreterMarkdown } from '../interpreterMarkdown';
-import { reInterpreterDefault } from '../../core/handlers/default/reInterpreter';
-import { renderHandlerMarkdownDocbytest } from '../../core/handlers/docbytest/renderHtmlMarkdow';
+import { reInterpreterDefault } from '../../core/handlers/reInterpreter';
+import { renderHandlerMarkdownDocbytest } from '../../core/handlers/renderHtmlMarkdow';
 
 export const RenderDocs = (): ReactElement => {
   const { docs } = useContext(DataContext);
@@ -37,7 +37,7 @@ export const RenderDocs = (): ReactElement => {
 
   const notExistsSelectedTests = testSelected.tests.length === 0;
   if (!notExistsSelectedTests) {
-    <div />;
+    return <div />;
   }
 
   return <>{renderItems()}</>;

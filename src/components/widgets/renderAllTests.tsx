@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
-import { reInterpreterDefault } from '../../core/handlers/default/reInterpreter';
-import { renderHandlerMarkdownDocbytest } from '../../core/handlers/docbytest/renderHtmlMarkdow';
+import { reInterpreterDefault } from '../../core/handlers/reInterpreter';
+import { renderHandlerMarkdownDocbytest } from '../../core/handlers/renderHtmlMarkdow';
 import { InterpreterMarkdown } from '../interpreterMarkdown';
 import { BadgeMethod } from './badgeMethod';
 import { useGetUrlApi } from '../../core/hooks/useGetUrlApi';

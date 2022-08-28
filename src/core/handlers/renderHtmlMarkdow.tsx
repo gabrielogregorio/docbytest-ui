@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import { generateIds } from '../../shared/generateIds';
-import { useGetUrlApi } from '../../hooks/useGetUrlApi';
-import { BoardViewer } from '../../../components/widgets/boardViewer';
-import { commentColors } from '../../helpers/colors';
-import { renderHandlerMarkdownType } from '../../interfaces/interpreter';
+import { generateIds } from '../shared/generateIds';
+import { useGetUrlApi } from '../hooks/useGetUrlApi';
+import { BoardViewer } from '../../components/widgets/boardViewer';
+import { commentColors } from '../helpers/colors';
+import { renderHandlerMarkdownType } from '../interfaces/interpreter';
 
 const extractBolder = (listAllOccurrence: any) => {
   const regexHasLink = /(\*\*.*?\*\*)/;
