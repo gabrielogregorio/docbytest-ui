@@ -1,15 +1,18 @@
+import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { DataProvider } from './core/contexts/dataProvider';
 import { MenuProvider } from './core/contexts/menuProvider';
-import App from './App';
 import { TestSelectedProvider } from './core/contexts/testSelectedProvider';
 import { ThemeProvider } from './core/contexts/themProvider';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
+// styles
+import './index.css';
+import { NotFoundPage } from './notFoundPage';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <TestSelectedProvider>
       <ThemeProvider>
@@ -18,6 +21,7 @@ root.render(
             <BrowserRouter>
               <Routes>
                 <Route path="/docs" element={<App />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </BrowserRouter>
           </DataProvider>

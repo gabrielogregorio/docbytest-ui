@@ -23,7 +23,12 @@ export const Header = () => {
           </button>
 
           <div className="mr-2">
-            <img src={Logo} alt="Logo do docbytet" className="hidden sm:block sm:w-[40px] sm:h-[29px]" />
+            <img
+              src={Logo}
+              alt="Logo do docbytet"
+              className="hidden sm:block sm:w-[40px] sm:h-[29px] select-none"
+              draggable={false}
+            />
           </div>
 
           <span>docbytest</span>
