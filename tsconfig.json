@@ -15,6 +15,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
+    "types": ["node", "cypress"],
     "isolatedModules": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -27,5 +28,5 @@
     }
   },
   "include": ["vite.config.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["./node_modules", "./cypress"]
 }

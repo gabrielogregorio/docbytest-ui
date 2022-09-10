@@ -16,6 +16,7 @@ export const Header = () => {
       <header className="text-white font-bold text-3xl uppercase w-full flex items-center justify-center ">
         <div className="bg-cyan-500 dark:bg-cyan-700 text-white font-bold text-xl text-left p-3 py-2 uppercase flex items-center h-[3.5rem] min-h-[3.5rem]">
           <button
+            id="expand-menu"
             type="button"
             onClick={() => toggleMenuIsOpen()}
             className="mr-2 lg:hidden border border-gray-300 dark:border-cyan-700 bg-white dark:bg-cyan-600 rounded-full p-2 text-cyan-600 dark:text-white">

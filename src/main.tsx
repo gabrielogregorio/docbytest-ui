@@ -7,8 +7,6 @@ import { DataProvider } from './core/contexts/dataProvider';
 import { MenuProvider } from './core/contexts/menuProvider';
 import { TestSelectedProvider } from './core/contexts/testSelectedProvider';
 import { ThemeProvider } from './core/contexts/themProvider';
-
-// styles
 import './index.css';
 import { NotFoundPage } from './notFoundPage';
 

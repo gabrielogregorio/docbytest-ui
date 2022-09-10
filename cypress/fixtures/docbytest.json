@@ -1,0 +1,235 @@
+{
+  "suites": [
+      {
+          "paths": {
+              "/auth": {
+                  "post": [
+                      {
+                          "title": "realiza login e obtém um token jwt",
+                          "description": "",
+                          "method": "post",
+                          "path": "/auth",
+                          "sendContent": {
+                              "username": "teste.mariana",
+                              "password": "teste.password"
+                          },
+                          "parameters": [],
+                          "headers": "",
+                          "response": {
+                              "statusCode": 200,
+                              "body": {
+                                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+                                  "id": "62a69b0137322c68b8c6b111"
+                              }
+                          }
+                      },
+                      {
+                          "title": "🚫 impede o login de usuário não cadastrado",
+                          "description": "",
+                          "method": "post",
+                          "path": "/auth",
+                          "sendContent": {
+                              "username": "test",
+                              "password": "test"
+                          },
+                          "parameters": [],
+                          "headers": "",
+                          "response": {
+                              "statusCode": 404,
+                              "body": {}
+                          }
+                      },
+                      {
+                          "title": "🚫 impede o login com senha inválida",
+                          "description": "",
+                          "method": "post",
+                          "path": "/auth",
+                          "sendContent": {
+                              "username": "teste.mariana",
+                              "password": "123"
+                          },
+                          "parameters": [],
+                          "headers": "",
+                          "response": {
+                              "statusCode": 403,
+                              "body": {}
+                          }
+                      }
+                  ]
+              },
+              "/user": {
+                  "delete": [
+                      {
+                          "title": "deletar a própria conta",
+                          "description": "",
+                          "method": "delete",
+                          "path": "/user",
+                          "sendContent": "",
+                          "parameters": [],
+                          "headers": {
+                              "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5c"
+                          },
+                          "response": {
+                              "statusCode": 200,
+                              "body": {}
+                          }
+                      }
+                  ]
+              }
+          },
+          "description": "O cadastro de usuário precisa ser solicitada aos desenvolvedores",
+          "title": "🔐 Autenticação",
+          "order": 1
+      },
+      {
+          "paths": {
+              "/user": {
+                  "post": [
+                      {
+                          "title": "Cadastrar um usuário",
+                          "description": "Cadastra um usuário que pode fazer e gerenciar posts no blog",
+                          "method": "post",
+                          "path": "/user",
+                          "sendContent": {
+                              "code": "código enviado pelos devs",
+                              "username": "lucia santos teste",
+                              "password": "1234abc"
+                          },
+                          "parameters": [],
+                          "headers": "",
+                          "response": {
+                              "statusCode": 200,
+                              "body": {
+                                  "username": "lucia santos teste"
+                              }
+                          }
+                      },
+                      {
+                          "title": "🚫 Impede o cadastro de um usuário que já existe",
+                          "description": "",
+                          "method": "post",
+                          "path": "/user",
+                          "sendContent": "",
+                          "parameters": [],
+                          "headers": "",
+                          "response": {
+                              "statusCode": 409,
+                              "body": {
+                                  "error": "Username is already registered"
+                              }
+                          }
+                      }
+                  ],
+                  "get": [
+                      {
+                          "title": "Obter a si mesmo",
+                          "description": "",
+                          "method": "get",
+                          "path": "/user",
+                          "sendContent": "",
+                          "parameters": [],
+                          "headers": {
+                              "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5c"
+                          },
+                          "response": {
+                              "statusCode": 200,
+                              "body": {
+                                  "username": "lucia santos teste"
+                              }
+                          }
+                      },
+                      {
+                          "title": "🚫 impede de obter usuário sem token",
+                          "description": "",
+                          "method": "get",
+                          "path": "/user",
+                          "sendContent": "",
+                          "parameters": [],
+                          "headers": "",
+                          "response": {
+                              "statusCode": 403,
+                              "body": {}
+                          }
+                      }
+                  ],
+                  "put": [
+                      {
+                          "title": "atualiza dados de si mesmo",
+                          "description": "Isso é útil para alterar dados pessoais, etc.\n\n    > red # Implementação pouco usada\n    > Atualmente essa funcionalidade não é usada no blog dicas de valorant",
+                          "method": "put",
+                          "path": "/user",
+                          "sendContent": {
+                              "username": "julia",
+                              "password": "abc987"
+                          },
+                          "parameters": [],
+                          "headers": {
+                              "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5c"
+                          },
+                          "response": {
+                              "statusCode": 200,
+                              "body": {
+                                  "username": "lucia santos teste"
+                              }
+                          }
+                      },
+                      {
+                          "title": "🚫 impede edição de usuário sem token",
+                          "description": "",
+                          "method": "put",
+                          "path": "/user",
+                          "sendContent": {
+                              "username": "testeQualquerCoisa",
+                              "password": "usuarioNotExists"
+                          },
+                          "parameters": [],
+                          "headers": "",
+                          "response": {
+                              "statusCode": 403,
+                              "body": {}
+                          }
+                      }
+                  ]
+                }
+               
+          },
+          "description": "O cadastro de usuário precisa ser solicitada aos desenvolvedores",
+          "title": "👤 Usuários",
+          "order": 2
+      }
+  ],
+  "docs": [
+      {
+          "title": "Title Docs 1",
+          "order": 1,
+          "docs": [
+              {
+                  "title": "Api Example Item 1",
+                  "order": 1,
+                  "text": "# title h1\n\nparagrify item **documentation item** [url item](https://example.app/) \n\n## Second Title\n \n\n| table-title | table-description |\n|---------|----------|\n| response-1 | response-2 |\n| response-3 | response-4 |\n"
+              },
+              {
+                  "title": "Api Example Item 2",
+                  "order": 2,
+                  "text": "# Title second"
+              }
+          ]
+      },
+      {
+        "title": "Title Docs 2",
+        "order": 3,
+        "docs": [
+            {
+                "title": "Api Example Item 3",
+                "order": 1,
+                "text": "# Any page"
+            },
+            {
+                "title": "Api Example Item 4",
+                "order": 2,
+                "text": "# Any page 2"
+            }
+        ]
+    }
+  ]
+}
