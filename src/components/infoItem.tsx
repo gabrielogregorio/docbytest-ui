@@ -28,7 +28,7 @@ export const InfoItem = ({
   method,
 }: {
   isSelected: boolean;
-  onClick: any;
+  onClick: () => void;
   localMethod: string;
   title: string;
   method: string;

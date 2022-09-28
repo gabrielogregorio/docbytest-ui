@@ -1,5 +1,5 @@
 import { getUrlApi } from '../hooks/getUrlApi';
-import { paramsType } from '../interfaces/api';
+import { contentRequestType, paramsType } from '../interfaces/api';
 
 export const mountUrlParams = (urlParams: paramsType[]) => {
   let mountParams = '';
@@ -19,14 +19,14 @@ export const mountQueryParams = (queryParams: paramsType[]) => {
   return mountParams;
 };
 
-const mountHeaderByType = (value: any): string => {
+const mountHeaderByType = (value: contentRequestType): contentRequestType => {
   if (typeof value === 'string') {
     return `${value}`;
   }
   return value;
 };
 
-export const mountHeadersParams = (headers: any) => {
+export const mountHeadersParams = (headers: contentRequestType) => {
   if (!headers) {
     return '';
   }
@@ -45,7 +45,7 @@ export const mountHeadersParams = (headers: any) => {
 type mountCurlRequestType = {
   method: string;
   path: string;
-  sendContent: any;
+  sendContent: contentRequestType;
   mountParams: string;
   mountQuery: string;
   mountHeaders: string;

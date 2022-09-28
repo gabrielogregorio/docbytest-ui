@@ -1,7 +1,15 @@
 import { JsonColorizer } from '../../core/jsonBeautfull';
 import { CopyClipboard } from './copyClipboard';
 
-export const BoardViewer = ({ response, title, type }: { type: string; response: any; title: string }) => {
+export const BoardViewer = ({
+  response,
+  title,
+  type,
+}: {
+  type: string;
+  response: string | number | true | object;
+  title: string;
+}) => {
   return (
     <div className="relative flex flex-col mb-2">
       <div className="flex bg-gray-800 text-gray-700 py-1 px-1">
@@ -14,7 +22,7 @@ export const BoardViewer = ({ response, title, type }: { type: string; response:
 
       <pre className="overflow-auto bg-gray-700 text-white py-1 px-1">
         <code className="bg-transparent outline-none w-full text-sm codeFont">
-          {type === 'json' ? <JsonColorizer text={JSON.stringify(response, null, 4)} /> : response}
+          {type === 'json' ? <JsonColorizer text={JSON.stringify(response, null, 4)} /> : response.toString()}
         </code>
       </pre>
 

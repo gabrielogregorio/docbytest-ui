@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { DataContext } from '../contexts/dataProvider';
 import { getUrlApi } from './getUrlApi';
 
@@ -7,8 +7,14 @@ export const useFetchDocsAndSaveContext = () => {
   const [error, setError] = useState<string>('');
   const { currentUrlOrigin } = getUrlApi();
   const { setData } = useContext(DataContext);
+  const isFirstLoading = useRef<boolean>(true);
 
   useEffect(() => {
+    if (!isFirstLoading.current) {
+      return;
+    }
+    isFirstLoading.current = false;
+
     setIsLoading(true);
     fetch(`${currentUrlOrigin}/docs-json`)
       .then((res) => res.json())
@@ -21,7 +27,7 @@ export const useFetchDocsAndSaveContext = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [currentUrlOrigin, setData]);
 
   return {
     error,

@@ -1,21 +1,20 @@
 import { useContext, useEffect } from 'react';
-import { Aside } from './components/widgets/aside';
-import { Docs } from './components/widgets/docs';
-import { DataContext } from './core/contexts/dataProvider';
-import { MenuContext } from './core/contexts/menuProvider';
-import { Header } from './components/layout/header';
-import { Container } from './components/layout/container';
-import { DocTests } from './components/widgets/docTests';
-import { TestSelectedContext } from './core/contexts/testSelectedProvider';
-import { useFetchDocsAndSaveContext } from './core/hooks/useFetchDocsAndSaveContext';
-import { Main } from './components/layout/main';
-import { Illustration } from './components/widgets/illustration';
+import { Aside } from '../components/widgets/aside';
+import { Docs } from '../components/widgets/docs';
+import { DataContext } from '../core/contexts/dataProvider';
+import { MenuContext } from '../core/contexts/menuProvider';
+import { Header } from '../components/layout/header';
+import { Container } from '../components/layout/container';
+import { DocTests } from '../components/widgets/docTests';
+import { TestSelectedContext } from '../core/contexts/testSelectedProvider';
+import { useFetchDocsAndSaveContext } from '../core/hooks/useFetchDocsAndSaveContext';
+import { Main } from '../components/layout/main';
+import { Illustration } from '../components/widgets/illustration';
 
-const App = () => {
+export default function DocsPage() {
   const { testSelected, setTestSelected } = useContext(TestSelectedContext);
   const { docs, suites } = useContext(DataContext);
   const { setMenuIsOpen } = useContext(MenuContext);
-
   const { isLoading, error } = useFetchDocsAndSaveContext();
 
   useEffect(() => {
@@ -26,6 +25,7 @@ const App = () => {
     if (docs?.length) {
       const firstDoc = docs[0];
       const firstItemFromDoc = `${firstDoc?.title}${firstDoc?.docs?.[0]?.title}`;
+
       setTestSelected({
         tests: [],
         indexSelected: firstItemFromDoc,
@@ -54,9 +54,7 @@ const App = () => {
                   imageSrc="searching.gif"
                   imageAlt="searching image"
                 />
-              ) : (
-                ''
-              )}
+              ) : null}
 
               {error ? (
                 <Illustration
@@ -67,9 +65,7 @@ const App = () => {
                   referenceHref="https://storyset.com/people"
                   referenceText="People illustrations by Storyset"
                 />
-              ) : (
-                ''
-              )}
+              ) : null}
 
               {!hasDocsOrTests && !isLoading && !error ? (
                 <Illustration
@@ -95,6 +91,4 @@ const App = () => {
       </div>
     </Container>
   );
-};
-
-export default App;
+}

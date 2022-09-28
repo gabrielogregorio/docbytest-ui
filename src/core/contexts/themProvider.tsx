@@ -1,11 +1,9 @@
+import { useEffect } from 'react';
 import { createContext, ReactNode, useMemo, useState } from 'react';
 
 type themeType = 'white' | 'dark';
 
 const nameThemeApiDocs = 'themeApiDocbytest';
-const themeApiDocbytest = localStorage.getItem(nameThemeApiDocs) || 'dark';
-
-const initialStateTheme: themeType = themeApiDocbytest === 'dark' ? 'dark' : 'white';
 
 type themeContextType = {
   theme: themeType;
@@ -15,7 +13,14 @@ type themeContextType = {
 export const ThemeContext = createContext({} as themeContextType);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<themeType>(initialStateTheme);
+  const [theme, setTheme] = useState<themeType>('dark');
+
+  useEffect(() => {
+    const themeApiDocbytest = localStorage.getItem(nameThemeApiDocs) || 'dark';
+
+    const initialStateTheme: themeType = themeApiDocbytest === 'dark' ? 'dark' : 'white';
+    setTheme(initialStateTheme);
+  }, []);
 
   const toggleTheme = () => {
     if (theme === 'dark') {

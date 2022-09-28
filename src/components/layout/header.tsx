@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { IconDark, IconLight, IconMenu } from '../../icons';
 import { ThemeContext } from '../../core/contexts/themProvider';
-import Logo from '../../assets/logo.png';
 import { MenuContext } from '../../core/contexts/menuProvider';
 
 export const Header = () => {
@@ -25,7 +24,7 @@ export const Header = () => {
 
           <div className="mr-2">
             <img
-              src={Logo}
+              src={'/logo.png'}
               alt="Logo do docbytet"
               className="hidden sm:block sm:w-[40px] sm:h-[29px] select-none"
               draggable={false}

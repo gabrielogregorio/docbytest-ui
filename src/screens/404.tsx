@@ -1,10 +1,9 @@
 import { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
-import { Container } from './components/layout/container';
-import { Header } from './components/layout/header';
-import { Illustration } from './components/widgets/illustration';
+import { Container } from '../components/layout/container';
+import { Header } from '../components/layout/header';
+import { Illustration } from '../components/widgets/illustration';
 
-export const NotFoundPage = (): ReactElement => {
+export default function NotFoundPage(): ReactElement {
   return (
     <Container>
       <Header />
@@ -14,9 +13,9 @@ export const NotFoundPage = (): ReactElement => {
         subtitle={
           <>
             {`You can try to access the `}
-            <Link to={'/docs'} className="underline">
+            <a href="/docs" className="underline">
               /docs{' '}
-            </Link>
+            </a>
             {`route, that's usually where we have the documentation`}
           </>
         }
@@ -27,4 +26,4 @@ export const NotFoundPage = (): ReactElement => {
       />
     </Container>
   );
-};
+}

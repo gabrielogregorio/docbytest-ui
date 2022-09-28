@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { createContext, useMemo, useState } from 'react';
 import { apiDocsType, apiResponseDocType, apiResponseFileTypes } from '../interfaces/api';
 
@@ -9,7 +10,7 @@ type DataContextType = {
 
 export const DataContext = createContext({} as DataContextType);
 
-export const DataProvider = ({ children }: any) => {
+export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [suites, setSuites] = useState<apiResponseFileTypes[]>([]);
   const [docs, setDocs] = useState<apiDocsType[]>([]);
 

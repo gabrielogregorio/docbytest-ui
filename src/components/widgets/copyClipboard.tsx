@@ -3,20 +3,21 @@ import { IconCopyClipboard } from '../../icons';
 import { copyToClipboard } from '../../core/helpers/clipboard';
 
 type copyClipboardType = {
-  dataToCopy: string;
+  dataToCopy: string | number | true | object;
 };
 
 export const CopyClipboard = ({ dataToCopy }: copyClipboardType) => {
   const [recentClickCopyItem, setRecentClickCopyItem] = useState<boolean>(false);
 
   useEffect(() => {
+    let timeout;
     if (recentClickCopyItem) {
-      setTimeout(() => {
+      timeout = setTimeout(() => {
         setRecentClickCopyItem(false);
       }, 900);
     }
 
-    return () => clearTimeout();
+    return () => clearTimeout(timeout);
   }, [recentClickCopyItem]);
 
   return (

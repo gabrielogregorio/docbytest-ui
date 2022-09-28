@@ -2,10 +2,12 @@ import { testsType } from '../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 import { InsideMenu } from './insideMenu';
 
+type setTestRunnerType = { test: testsType; caseSelected: number };
+
 type renderTestsType = {
   tests: testsType[];
   testRunner: InitialTestRunnerType;
-  setTestRunner: Function;
+  setTestRunner: (data: setTestRunnerType) => void;
 };
 
 export const RenderTests = ({ tests, testRunner, setTestRunner }: renderTestsType) => {
