@@ -3,8 +3,6 @@ import { DataContext } from '../../core/contexts/dataProvider';
 import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
 import { apiDocsType, docItemType } from '../../core/interfaces/api';
 import { InterpreterMarkdown } from '../interpreterMarkdown';
-import { reInterpreterDefault } from '../../core/handlers/reInterpreter';
-import { renderHandlerMarkdownDocbytest } from '../../core/handlers/renderHtmlMarkdow';
 
 export const Docs = (): ReactElement => {
   const { docs } = useContext(DataContext);
@@ -29,14 +27,7 @@ export const Docs = (): ReactElement => {
             return null;
           }
 
-          return (
-            <InterpreterMarkdown
-              key={docItem.text}
-              text={docItem.text}
-              reInterpreter={reInterpreterDefault}
-              renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
-            />
-          );
+          return <InterpreterMarkdown key={docItem.text} text={docItem.text} />;
         });
       })}
     </>

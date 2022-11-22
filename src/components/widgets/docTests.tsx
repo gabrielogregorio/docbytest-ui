@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
-import { reInterpreterDefault } from '../../core/handlers/reInterpreter';
-import { renderHandlerMarkdownDocbytest } from '../../core/handlers/renderHtmlMarkdow';
 import { InterpreterMarkdown } from '../interpreterMarkdown';
 import { BadgeMethod } from './badgeMethod';
 import { getUrlApi } from '../../core/hooks/getUrlApi';
@@ -41,13 +39,7 @@ export const DocTests = () => {
             </h1>
           ) : null}
 
-          {descriptionBase ? (
-            <InterpreterMarkdown
-              text={descriptionBase}
-              reInterpreter={reInterpreterDefault}
-              renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
-            />
-          ) : null}
+          {descriptionBase ? <InterpreterMarkdown text={descriptionBase} /> : null}
 
           <span className="border-b-2 block" />
 
@@ -64,13 +56,7 @@ export const DocTests = () => {
             <h2 className="uppercase dark:text-gray-200 text-gray-600 font-bold text-lg mt-2">{testRunner.title}</h2>
           ) : null}
 
-          {testRunner.description ? (
-            <InterpreterMarkdown
-              text={testRunner.description}
-              reInterpreter={reInterpreterDefault}
-              renderHandlerMarkdown={renderHandlerMarkdownDocbytest}
-            />
-          ) : null}
+          {testRunner.description ? <InterpreterMarkdown text={testRunner.description} /> : null}
 
           {testRunner.method ? <TestRunnerModal testRunner={testRunner} /> : null}
         </>
