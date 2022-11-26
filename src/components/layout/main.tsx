@@ -1,6 +1,10 @@
 import { ReactNode } from 'react';
 
-export const Main = ({ children }: { children: ReactNode }) => {
+type MainProps = {
+  children: ReactNode;
+};
+
+export const Main = ({ children }: MainProps) => {
   return (
     <main className="relative z-10 col-span-12 lg:col-span-9 flex flex-col max-h-screen">
       <div

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
+import { DocSelectedContext } from '../../core/contexts/docSelectedProvider';
 import { testsType } from '../../core/interfaces/api';
 import { InfoItem } from '../infoItem';
 import { InfoHeader } from '../infoHeader';
@@ -8,40 +8,39 @@ type groupCasesType = {
   title: string;
   description: string;
   listBase: {
+    id: string;
     tests: testsType[];
     isSelected: boolean;
-    indexPath: string;
-    indexMethod: string;
     localMethod: string;
     title: string;
     method: string;
   }[];
 };
 
-export const GroupCases = ({ listBase, title: titleBase, description: descriptionBase }: groupCasesType) => {
-  const { setTestSelected } = useContext(TestSelectedContext);
+export const GroupCases = ({ listBase, title, description }: groupCasesType) => {
+  const { setDocSelected } = useContext(DocSelectedContext);
 
   if (listBase.length === 0) {
     return null;
   }
 
   return (
-    <InfoHeader key={titleBase} title={titleBase}>
-      {listBase.map(({ tests, isSelected, indexPath, indexMethod, localMethod, title, method }) => {
+    <InfoHeader key={title} title={title}>
+      {listBase.map(({ tests, isSelected, localMethod, title: titleLocal, method, id }) => {
         return (
           <InfoItem
-            key={title}
+            key={titleLocal}
             isSelected={isSelected}
             onClick={() =>
-              setTestSelected({
+              setDocSelected({
                 tests,
-                indexSelected: `${titleBase}-${indexPath}-${indexMethod}`,
-                titleBase,
-                descriptionBase,
+                idContent: id,
+                title: titleLocal,
+                description,
               })
             }
             localMethod={localMethod}
-            title={title}
+            title={titleLocal}
             method={method}
           />
         );

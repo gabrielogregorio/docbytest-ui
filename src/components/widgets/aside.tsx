@@ -1,47 +1,6 @@
 import { useState, useContext } from 'react';
 import { MenuContext } from '../../core/contexts/menuProvider';
 import { GroupSuits } from './groupSuits';
-import { InfoItem } from '../infoItem';
-import { InfoHeader } from '../infoHeader';
-import { DataContext } from '../../core/contexts/dataProvider';
-import { TestSelectedContext } from '../../core/contexts/testSelectedProvider';
-import { apiDocsType, docItemType } from '../../core/interfaces/api';
-
-const GroupDocs = () => {
-  const { testSelected, setTestSelected } = useContext(TestSelectedContext);
-  const { docs } = useContext(DataContext);
-
-  return (
-    <>
-      {docs.map((doc: apiDocsType) => {
-        return (
-          <InfoHeader title={doc.title} key={doc.title}>
-            {doc.docs.map((docItem: docItemType) => {
-              const indexTitleAndTest = `${doc.title}${docItem.title}`;
-              return (
-                <InfoItem
-                  key={indexTitleAndTest}
-                  isSelected={testSelected.indexSelected === indexTitleAndTest}
-                  onClick={() =>
-                    setTestSelected({
-                      tests: [],
-                      indexSelected: indexTitleAndTest,
-                      titleBase: '',
-                      descriptionBase: '',
-                    })
-                  }
-                  localMethod="docs"
-                  title={docItem.title}
-                  method=""
-                />
-              );
-            })}
-          </InfoHeader>
-        );
-      })}
-    </>
-  );
-};
 
 export const Aside = () => {
   const [filter, setFilter] = useState<string>('');
@@ -66,8 +25,6 @@ export const Aside = () => {
         </div>
         <div className="overflow-y-auto">
           <div className="flex flex-col px-2">
-            <GroupDocs />
-
             <GroupSuits filter={filter} />
           </div>
         </div>
