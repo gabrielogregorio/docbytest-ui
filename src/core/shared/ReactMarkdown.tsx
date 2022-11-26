@@ -1,11 +1,40 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unstable-nested-components */
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { commentColors } from '../helpers/colors';
 import { getUrlApi } from '../hooks/getUrlApi';
+
+const getTextFromReactNode = (node: ReactNode): string | number => {
+  if (typeof node === 'string' || typeof node === 'number') return node || '';
+  if (node instanceof Array) return node.map(getTextFromReactNode).join('');
+  if (typeof node === 'object' && node) return getTextFromReactNode((node as ReactElement)?.props?.children);
+  return '';
+};
+
+const getNameColor = (stringElement: string) => {
+  const reColor = /(.{3,}?)#/;
+  const resultsColor = stringElement.match(reColor);
+  let color = '';
+  if (resultsColor) {
+    color = resultsColor[1];
+  }
+  return color;
+};
+
+const getTitle = (stringElement: string) => {
+  const reTitleFinal = /.*?#(.*)/;
+  const results = reTitleFinal.exec(stringElement);
+  let titleFinal = '';
+  if (results) {
+    titleFinal = results[1];
+  }
+
+  return titleFinal;
+};
 
 const { currentUrlOrigin } = getUrlApi();
 
@@ -50,7 +79,7 @@ export const MarkdownToHtml = ({ body }: { body: string }): ReactElement => {
           img: ({ src, title }) => <img src={`${currentUrlOrigin}${src}`} alt={title} />,
 
           table: ({ children }) => (
-            <table className="table-auto w-full text-lg dark:text-gray-200 text-gray-600 my-4 dark:bg-gray-700 bg-gray-200">
+            <table className="table-auto w-full text-lg dark:text-gray-200 text-gray-600 my-4 dark:bg-[#282A36] bg-gray-200">
               {children}
             </table>
           ),
@@ -94,32 +123,26 @@ export const MarkdownToHtml = ({ body }: { body: string }): ReactElement => {
             );
           },
 
-          //   comment: (color: string, title: string, text: string) => {
-          //     const removeSpecialCharacters = (textItem: string) => {
-          //       return textItem.replace(/^\s{0,10}>\s{0,10}/, '');
-          //     };
+          blockquote: ({ children }) => {
+            const stringElement: string = getTextFromReactNode(children).toString();
 
-          //     const colorFinal = removeSpecialCharacters(color.trim().toLowerCase());
+            const titleFinal = getTitle(stringElement);
+            const color = getNameColor(stringElement);
+            const bodyText = stringElement.replace(/.*?#.*/g, '');
 
-          //     const backgroundColor = commentColors[colorFinal]?.bg || commentColors.default.bg;
-          //     const titleColor = commentColors[colorFinal]?.title || commentColors.default.title;
-          //     const textColor = commentColors[colorFinal]?.text || commentColors.default.text;
+            const colorFinal = color.trim().toLowerCase();
+            const backgroundColor = commentColors[colorFinal]?.bg || commentColors.default.bg;
+            const titleColor = commentColors[colorFinal]?.title || commentColors.default.title;
+            const textColor = commentColors[colorFinal]?.text || commentColors.default.text;
 
-          //     const linesComment = text.split('\n');
+            return (
+              <blockquote className={`${backgroundColor} py-4`}>
+                <h4 className={`uppercase text-lg font-bold ${titleColor}`}>{titleFinal}</h4>
 
-          //     return (
-          //       <div className={`${backgroundColor} py-4`}>
-          //         <h4 className={`uppercase text-lg font-bold ${titleColor}`}>{extractUrls(title)}</h4>
-          //         {linesComment.map((lineComment) => {
-          //           return (
-          //             <p key={generateIds()} className={` text-lg font-base ${textColor} pt-2`}>
-          //               {extractUrls(removeSpecialCharacters(lineComment))}
-          //             </p>
-          //           );
-          //         })}
-          //       </div>
-          //     );
-          //   },
+                <p className={` text-lg font-base ${textColor} pt-2`}>{bodyText}</p>
+              </blockquote>
+            );
+          },
 
           p: ({ children }) => <p className=" text-lg dark:text-gray-200 text-gray-600 my-2">{children}</p>,
         }}>
