@@ -1,6 +1,6 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { CopyClipboard } from './copyClipboard';
+import { CopyClipboard } from '../copyClipboard';
 
 type typeType = 'json' | 'bash';
 

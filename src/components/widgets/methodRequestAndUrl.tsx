@@ -2,14 +2,14 @@ import { ReactNode } from 'react';
 import { parametersExampleType } from '../../core/interfaces/api';
 import { CopyClipboard } from './copyClipboard';
 
-type inputParamType = {
+type MethodRequestAndUrlType = {
   type: string;
   name: string;
   value: parametersExampleType;
   label: string | ReactNode;
 };
 
-export const InputParam = ({ type, name, value, label }: inputParamType) => {
+export const MethodRequestAndUrl = ({ type, name, value, label }: MethodRequestAndUrlType) => {
   return (
     <div className="flex items-center dark:bg-[#282A36] my-2 bg-[#282A36] text-gray-700 overflow-x-auto">
       <label className="font-bold mr-3 flex w-full" htmlFor={name}>

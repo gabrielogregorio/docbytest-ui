@@ -11,7 +11,7 @@ export const RenderDocs = () => {
   return (
     <>
       {docs.map((doc: apiDocsType) => {
-        return doc.docs.map((docItem: docItemType) => {
+        return doc?.docs?.map((docItem: docItemType) => {
           const docNotHasSelected = !docSelected.idContent.endsWith(docItem.title);
           if (docNotHasSelected) {
             return null;

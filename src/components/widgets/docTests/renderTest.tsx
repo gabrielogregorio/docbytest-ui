@@ -5,20 +5,20 @@ import { testsType } from '../../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../../core/interfaces/testRunner';
 import { InterpreterMarkdown } from '../../interpreterMarkdown';
 import { BadgeMethod } from '../badgeMethod';
-import { InputParam } from '../inputParam';
+import { MethodRequestAndUrl } from '../methodRequestAndUrl';
 import { RenderTests } from '../renderTests';
-import { TestRunnerModal } from '../testRunnerModal';
+import { RequestInfo } from '../RequestInfo';
 
 export const RenderTest = () => {
   const { docSelected } = useContext(DocSelectedContext);
   const testsSelectedItem: testsType[] = docSelected?.tests;
-  const [testRunner, setTestRunner] = useState<InitialTestRunnerType>({
+  const [testRunner, setTestSelected] = useState<InitialTestRunnerType>({
     ...testsSelectedItem?.[0],
     caseSelected: 0,
   });
 
   useEffect(() => {
-    setTestRunner({
+    setTestSelected({
       ...testsSelectedItem?.[0],
       caseSelected: 0,
     });
@@ -37,20 +37,20 @@ export const RenderTest = () => {
 
       <span className="border-b-2 block" />
 
-      <InputParam
+      <MethodRequestAndUrl
         label={<BadgeMethod onlyText method={testRunner?.method} />}
         name="auth"
         type="text"
         value={`${currentUrlOrigin}${testRunner?.path}`}
       />
 
-      <RenderTests tests={testsSelectedItem} testRunner={testRunner} setTestRunner={setTestRunner} />
+      <RenderTests tests={testsSelectedItem} testRunner={testRunner} setTestSelected={setTestSelected} />
 
       <h2 className="uppercase dark:text-gray-200 text-gray-600 font-bold text-lg mt-2">{testRunner.title}</h2>
 
       {testRunner.description ? <InterpreterMarkdown text={testRunner.description} /> : null}
 
-      {testRunner.method ? <TestRunnerModal testRunner={testRunner} /> : null}
+      {testRunner.method ? <RequestInfo testRunner={testRunner} /> : null}
     </div>
   );
 };
