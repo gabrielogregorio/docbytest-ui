@@ -5,10 +5,10 @@ import { InsideMenu } from './insideMenu';
 type renderTestsType = {
   tests: testsType[];
   testRunner: InitialTestRunnerType;
-  setTestRunner: Function;
+  setTestSelected: Function;
 };
 
-export const RenderTests = ({ tests, testRunner, setTestRunner }: renderTestsType) => {
+export const RenderTests = ({ tests, testRunner, setTestSelected }: renderTestsType) => {
   return (
     <div className="flex overflow-auto">
       {tests.map((test: testsType, index: number) => {
@@ -18,7 +18,7 @@ export const RenderTests = ({ tests, testRunner, setTestRunner }: renderTestsTyp
             isSelected={testRunner.caseSelected === index}
             text={test?.response?.statusCode}
             onClick={() =>
-              setTestRunner({
+              setTestSelected({
                 ...test,
                 caseSelected: index,
               })

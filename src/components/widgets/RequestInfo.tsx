@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GroupInputParams } from './groupInputParams';
+import { GroupMethodRequestAndUrls } from './groupInputParams';
 import {
   mountCurlRequest,
   mountHeadersParams,
@@ -7,7 +7,7 @@ import {
   mountUrlParams,
 } from '../../core/helpers/handleQueries';
 import { GroupInputHeaders } from './groupInputHeaders';
-import { BoardViewer } from './boardViewer';
+import { BoardViewer } from './boardViewer/index';
 import { contentRequestType, paramsType } from '../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 
@@ -37,7 +37,7 @@ const mountCurlRequestOrchestrator = (
   });
 };
 
-export const TestRunnerModal = ({ testRunner }: { testRunner: InitialTestRunnerType }) => {
+export const RequestInfo = ({ testRunner }: { testRunner: InitialTestRunnerType }) => {
   const queryParams = testRunner?.parameters?.filter((item: paramsType) => item.in === 'query');
   const urlParams = testRunner?.parameters?.filter((item: paramsType) => item.in === 'param');
   const { headers, method, path, sendContent } = testRunner ?? {};
@@ -59,29 +59,16 @@ export const TestRunnerModal = ({ testRunner }: { testRunner: InitialTestRunnerT
   return (
     <div className="relative">
       {headers ? <GroupInputHeaders headers={headers} /> : null}
-      <GroupInputParams params={queryParams} title="Query" />
-      <GroupInputParams params={urlParams} title="Parametros" />
 
-      {sendContent ? (
-        <div>
-          <h3 className="font-bold dark:text-gray-200 text-gray-600 mr-3 mb-2">Payload</h3>
-          <BoardViewer type="json" response={sendContent} title="json" />
-        </div>
-      ) : null}
+      {queryParams ? <GroupMethodRequestAndUrls params={queryParams} title="Query" /> : null}
 
-      {response ? (
-        <div>
-          <h3 className="font-bold dark:text-gray-200 text-gray-600 mr-3 mb-2">Resposta</h3>
-          <BoardViewer type="json" response={response} title="json" />
-        </div>
-      ) : null}
+      {urlParams ? <GroupMethodRequestAndUrls params={urlParams} title="Parametros" /> : null}
 
-      {body ? (
-        <div>
-          <h3 className="font-bold dark:text-gray-200 text-gray-600 mr-3 mb-2">Requisição</h3>
-          <BoardViewer type="text" response={body} title="curl" />
-        </div>
-      ) : null}
+      {sendContent ? <BoardViewer type="json" response={sendContent} title="json" titleBase="Payload" /> : null}
+
+      {response ? <BoardViewer type="json" response={response} title="json" titleBase="Resposta" /> : null}
+
+      {body ? <BoardViewer type="bash" response={body} title="curl" titleBase="Requisição" /> : null}
     </div>
   );
 };

@@ -1,17 +1,16 @@
 import { useContext, useEffect } from 'react';
 import { Aside } from './components/widgets/aside';
-import { Docs } from './components/widgets/docs';
 import { DataContext } from './core/contexts/dataProvider';
 import { MenuContext } from './core/contexts/menuProvider';
 import { Header } from './components/layout/header';
 import { Container } from './components/layout/container';
-import { DocTests } from './components/widgets/docTests';
-import { TestSelectedContext } from './core/contexts/testSelectedProvider';
+import { DocSelectedContext } from './core/contexts/docSelectedProvider';
 import { useFetchDocsAndSaveContext } from './core/hooks/useFetchDocsAndSaveContext';
 import { Main } from './components/layout/main';
+import { DocTests } from './components/widgets/docTests';
 
 const App = () => {
-  const { testSelected, setTestSelected } = useContext(TestSelectedContext);
+  const { docSelected, setDocSelected } = useContext(DocSelectedContext);
   const { docs } = useContext(DataContext);
   const { setMenuIsOpen } = useContext(MenuContext);
 
@@ -19,18 +18,19 @@ const App = () => {
 
   useEffect(() => {
     setMenuIsOpen(false);
-  }, [testSelected.indexSelected]);
+  }, [docSelected.idContent]);
 
   useEffect(() => {
     if (docs?.length) {
-      const firstDoc = docs[0];
-      const firstItemFromDoc = `${firstDoc?.title}${firstDoc?.docs?.[0]?.title}`;
-      setTestSelected({
-        tests: [],
-        indexSelected: firstItemFromDoc,
-        titleBase: '',
-        descriptionBase: '',
-      });
+      const setFirstDoc = () => {
+        setDocSelected({
+          tests: [],
+          idContent: `${docs[0]?.title}${docs[0]?.docs?.[0]?.title}`,
+          title: '',
+          description: '',
+        });
+      };
+      setFirstDoc();
     }
   }, [docs?.length]);
 
@@ -43,7 +43,6 @@ const App = () => {
         className="grid grid-cols-12 w-full overflow-hidden bg-white dark:bg-dark dark:text-white relative">
         <Aside />
         <Main>
-          <Docs />
           <DocTests />
         </Main>
       </div>

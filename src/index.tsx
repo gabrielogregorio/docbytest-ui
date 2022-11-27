@@ -5,13 +5,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { DataProvider } from './core/contexts/dataProvider';
 import { MenuProvider } from './core/contexts/menuProvider';
 import App from './App';
-import { TestSelectedProvider } from './core/contexts/testSelectedProvider';
+import { DocSelectedProvider } from './core/contexts/docSelectedProvider';
 import { ThemeProvider } from './core/contexts/themProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <TestSelectedProvider>
+    <DocSelectedProvider>
       <ThemeProvider>
         <MenuProvider>
           <DataProvider>
@@ -23,6 +23,6 @@ root.render(
           </DataProvider>
         </MenuProvider>
       </ThemeProvider>
-    </TestSelectedProvider>
+    </DocSelectedProvider>
   </React.StrictMode>,
 );
