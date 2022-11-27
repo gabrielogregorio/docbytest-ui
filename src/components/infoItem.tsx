@@ -36,7 +36,7 @@ export const InfoItem = ({
   const { text } = dataBadge?.[method] ?? dataBadge.default;
   const isSelectedStyle = isSelected ? 'dark:bg-gray-800 bg-gray-100' : '';
   return (
-    <div>
+    <li>
       <div className={`text-gray-700 p-1.5  ${isSelectedStyle}`}>
         <button type="button" onClick={() => onClick()} className=" flex w-full cursor-pointer text-left">
           <div className="flex items-center flex-1">
@@ -48,6 +48,6 @@ export const InfoItem = ({
           </div>
         </button>
       </div>
-    </div>
+    </li>
   );
 };

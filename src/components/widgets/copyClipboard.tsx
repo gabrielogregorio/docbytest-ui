@@ -10,13 +10,14 @@ export const CopyClipboard = ({ dataToCopy }: copyClipboardType) => {
   const [recentClickCopyItem, setRecentClickCopyItem] = useState<boolean>(false);
 
   useEffect(() => {
+    let id: any;
     if (recentClickCopyItem) {
-      setTimeout(() => {
+      id = setTimeout(() => {
         setRecentClickCopyItem(false);
       }, 900);
     }
 
-    return () => clearTimeout();
+    return () => clearTimeout(id);
   }, [recentClickCopyItem]);
 
   return (

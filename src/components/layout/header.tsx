@@ -17,6 +17,7 @@ export const Header = () => {
         <div className="bg-cyan-500 dark:bg-cyan-700 text-white font-bold text-xl text-left p-3 py-2 uppercase flex items-center h-[3.5rem] min-h-[3.5rem]">
           <button
             type="button"
+            id="expand-menu"
             onClick={() => toggleMenuIsOpen()}
             className="mr-2 lg:hidden border border-gray-300 dark:border-cyan-700 bg-white dark:bg-cyan-600 rounded-full p-2 text-cyan-600 dark:text-white">
             <IconMenu />
@@ -26,7 +27,7 @@ export const Header = () => {
             <img src={Logo} alt="Logo do docbytet" className="hidden sm:block sm:w-[40px] sm:h-[29px]" />
           </div>
 
-          <span>docbytest</span>
+          <div id="main-title">docbytest</div>
         </div>
 
         <div className="flex-1" />
@@ -34,6 +35,7 @@ export const Header = () => {
         <div>
           <button
             type="button"
+            data-testid="change-theme"
             onClick={() => toggleTheme()}
             className="bg-cyan-700 dark:bg-cyan-600 dark:ring-cyan-600 ring-cyan-700 ring-2 w-16 flex rounded-xl relative">
             <div
