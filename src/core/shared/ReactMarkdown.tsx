@@ -16,7 +16,7 @@ const getTextFromReactNode = (node: ReactNode): string | number => {
 };
 
 const getNameColor = (stringElement: string) => {
-  const reColor = /(.{3,}?)#/;
+  const reColor = /(.{3,200}?)#/;
   const resultsColor = stringElement.match(reColor);
   let color = '';
   if (resultsColor) {
@@ -26,7 +26,7 @@ const getNameColor = (stringElement: string) => {
 };
 
 const getTitle = (stringElement: string) => {
-  const reTitleFinal = /.*?#(.*)/;
+  const reTitleFinal = /.{0,200}?#(.*)/;
   const results = reTitleFinal.exec(stringElement);
   let titleFinal = '';
   if (results) {
@@ -128,7 +128,7 @@ export const MarkdownToHtml = ({ body }: { body: string }): ReactElement => {
 
             const titleFinal = getTitle(stringElement);
             const color = getNameColor(stringElement);
-            const bodyText = stringElement.replace(/.*?#.*/g, '');
+            const bodyText = stringElement.replace(/.{0,999}?#.*/g, '');
 
             const colorFinal = color.trim().toLowerCase();
             const backgroundColor = commentColors[colorFinal]?.bg || commentColors.default.bg;
