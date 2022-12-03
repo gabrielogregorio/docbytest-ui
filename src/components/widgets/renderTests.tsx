@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { testsType } from '../../core/interfaces/api';
 import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 import { InsideMenu } from './insideMenu';
@@ -8,7 +9,7 @@ type renderTestsType = {
   setTestSelected: Function;
 };
 
-export const RenderTests = ({ tests, testRunner, setTestSelected }: renderTestsType) => {
+export const RenderTests = ({ tests, testRunner, setTestSelected }: renderTestsType): ReactElement => {
   return (
     <div className="flex overflow-auto">
       {tests.map((test: testsType, index: number) => {
@@ -17,7 +18,7 @@ export const RenderTests = ({ tests, testRunner, setTestSelected }: renderTestsT
             key={`${test.description}-${test.title}-${test.path}`}
             isSelected={testRunner.caseSelected === index}
             text={test?.response?.statusCode}
-            onClick={() =>
+            onClick={(): void =>
               setTestSelected({
                 ...test,
                 caseSelected: index,

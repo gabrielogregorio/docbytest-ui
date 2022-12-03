@@ -1,13 +1,14 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 type insideMenu = {
-  onClick: any;
+  onClick: () => void;
   isSelected: boolean;
   text: number;
 };
 
 const isNumberAndStatusCode = (statusCode: number): ReactNode => {
   const statusCodeNumber: number = Number(statusCode);
+  // TODO: MAKE EXTERNAL CONFIG FILE
   const optionsStatusCode: { [key: number | string]: string } = {
     200: '🆗',
     201: '👍',
@@ -23,7 +24,7 @@ const isNumberAndStatusCode = (statusCode: number): ReactNode => {
     default: '',
   };
 
-  const icon = optionsStatusCode[statusCodeNumber] || optionsStatusCode.default;
+  const icon: string = optionsStatusCode[statusCodeNumber] || optionsStatusCode.default;
 
   return (
     <span>
@@ -34,8 +35,8 @@ const isNumberAndStatusCode = (statusCode: number): ReactNode => {
   );
 };
 
-export const InsideMenu = ({ onClick, isSelected, text }: insideMenu) => {
-  const styleIsCaseSelected = isSelected
+export const InsideMenu = ({ onClick, isSelected, text }: insideMenu): ReactElement => {
+  const styleIsCaseSelected: string = isSelected
     ? 'border-b-4 border-b-cyan-500 bg-gray-100 dark:bg-[#282A36]'
     : 'border-b-4 border-b-gray-200 dark:border-b-gray-600 dark:bg-dark';
 
@@ -43,7 +44,7 @@ export const InsideMenu = ({ onClick, isSelected, text }: insideMenu) => {
     <button
       type="button"
       title={text?.toString()}
-      onClick={() => onClick()}
+      onClick={(): void => onClick()}
       className={`p-2 py-1.5 flex justify-center items-center group ${styleIsCaseSelected} hover:border-b-cyan-500`}>
       <div className="py-2 px-3">
         <div className="flex items-center dark:text-gray-200 text-gray-600 group-hover:text-cyan-500 font-bold">

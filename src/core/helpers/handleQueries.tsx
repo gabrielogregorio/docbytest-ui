@@ -1,41 +1,40 @@
 import { getUrlApi } from '../hooks/getUrlApi';
-import { paramsType } from '../interfaces/api';
+import { contentRequestType, paramsType } from '../interfaces/api';
 
-export const mountUrlParams = (urlParams: paramsType[]) => {
-  let mountParams = '';
-  urlParams.forEach((url) => {
+export const mountUrlParams = (urlParams: paramsType[]): string => {
+  let mountParams: string = '';
+  urlParams.forEach((url: paramsType) => {
     mountParams += `${url.example}/`;
   });
 
   return mountParams;
 };
 
-export const mountQueryParams = (queryParams: paramsType[]) => {
-  let mountParams = '?';
-  queryParams.forEach((url) => {
+export const mountQueryParams = (queryParams: paramsType[]): string => {
+  let mountParams: string = '?';
+  queryParams.forEach((url: paramsType) => {
     mountParams += `${url.name}=${url.example}&`;
   });
 
   return mountParams;
 };
 
-const mountHeaderByType = (value: any): string => {
-  if (typeof value === 'string') {
-    return `${value}`;
-  }
+const mountHeaderByType = (value: contentRequestType): contentRequestType => {
   return value;
 };
 
-export const mountHeadersParams = (headers: any) => {
+export const mountHeadersParams = (headers: contentRequestType): string => {
   if (!headers) {
     return '';
   }
 
-  let mountHeaders = '';
+  let mountHeaders: string = '';
 
-  const keysHeader = Object.keys(headers);
-  keysHeader.forEach((key, index) => {
-    const shouldBreakLine = keysHeader.length !== index + 1 ? '\n' : '';
+  const keysHeader: string[] = Object.keys(headers);
+  keysHeader.forEach((key: string, index: number) => {
+    const shouldBreakLine: string = keysHeader.length !== index + 1 ? '\n' : '';
+
+    // @ts-ignore
     mountHeaders += `--header "${key}: ${mountHeaderByType(headers[key])}" \\${shouldBreakLine}`;
   });
 
@@ -45,7 +44,7 @@ export const mountHeadersParams = (headers: any) => {
 type mountCurlRequestType = {
   method: string;
   path: string;
-  sendContent: any;
+  sendContent: contentRequestType;
   mountParams: string;
   mountQuery: string;
   mountHeaders: string;
@@ -58,10 +57,10 @@ export const mountCurlRequest = ({
   mountParams,
   mountQuery,
   mountHeaders,
-}: mountCurlRequestType) => {
+}: mountCurlRequestType): string => {
   const { currentUrlOrigin } = getUrlApi();
-  const sendContentMounted = `'${JSON.stringify(sendContent, null, 2).replaceAll("'", '"')}'`;
-  const linkRequest = `${currentUrlOrigin}${path}/${mountParams || ''}${
+  const sendContentMounted: string = `'${JSON.stringify(sendContent, null, 2).replaceAll("'", '"')}'`;
+  const linkRequest: string = `${currentUrlOrigin}${path}/${mountParams || ''}${
     mountQuery.slice(0, mountQuery.length - 1) || ''
   }`;
 

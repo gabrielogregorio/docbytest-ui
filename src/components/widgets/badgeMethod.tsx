@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 type badgeType = { [method: string]: { title: string; bg: string; border: string } };
 
 export const dataBadge: badgeType = {
@@ -30,7 +32,7 @@ export const dataBadge: badgeType = {
   default: { title: 'desconhecido', bg: 'bg-gray-500', border: 'border-l-2 border-gray-500' },
 };
 
-export const BadgeMethod = ({ method, onlyText }: { method: string; onlyText?: boolean }) => {
+export const BadgeMethod = ({ method, onlyText = false }: { method: string; onlyText?: boolean }): ReactElement => {
   if (!method) {
     return <div />;
   }
@@ -38,8 +40,4 @@ export const BadgeMethod = ({ method, onlyText }: { method: string; onlyText?: b
   const { title, bg, border } = dataBadge?.[method] ?? dataBadge.default;
 
   return <div className={`select-none ${bg} ${onlyText ? '' : border} px-2 text-sm w-14 text-left`}>{title}</div>;
-};
-
-BadgeMethod.defaultProps = {
-  onlyText: false,
 };

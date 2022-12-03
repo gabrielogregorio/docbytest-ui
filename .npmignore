@@ -14,3 +14,5 @@ coverage
 cypress.config.ts
 package.json
 package-lock.json
+tsconfig.tsbuildinfo
+commitlint.config.js

@@ -1,12 +1,12 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, ChangeEvent, ReactElement } from 'react';
 import { MenuContext } from '../../core/contexts/menuProvider';
 import { GroupSuits } from './groupSuits';
 
-export const Aside = () => {
+export const Aside = (): ReactElement => {
   const [filter, setFilter] = useState<string>('');
   const { menuIsOpen } = useContext(MenuContext);
 
-  const styleMenuIsOpen = menuIsOpen ? 'w-full sm:w-80 lg:w-full' : 'hidden lg:block lg:w-full';
+  const styleMenuIsOpen: string = menuIsOpen ? 'w-full sm:w-80 lg:w-full' : 'hidden lg:block lg:w-full';
 
   return (
     <aside
@@ -17,7 +17,7 @@ export const Aside = () => {
             type="search"
             name="searchRequests"
             value={filter}
-            onChange={(event) => setFilter(event.target.value)}
+            onChange={(event: ChangeEvent<HTMLInputElement>): void => setFilter(event.target.value)}
             id="searchRequests"
             placeholder="Pesquise endpoints, textos..."
             className="w-full text-gray-500 focus:outline-none dark:bg-dark p-2 "

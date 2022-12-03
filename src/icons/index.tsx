@@ -1,4 +1,6 @@
-export const IconMenu = () => {
+import { ReactElement } from 'react';
+
+export const IconMenu = (): ReactElement => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +14,7 @@ export const IconMenu = () => {
   );
 };
 
-export const IconLight = () => {
+export const IconLight = (): ReactElement => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +32,7 @@ export const IconLight = () => {
   );
 };
 
-export const IconDark = () => {
+export const IconDark = (): ReactElement => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +50,7 @@ export const IconDark = () => {
   );
 };
 
-export const IconCopyClipboard = () => {
+export const IconCopyClipboard = (): ReactElement => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

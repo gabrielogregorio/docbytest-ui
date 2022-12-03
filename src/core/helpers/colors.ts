@@ -1,4 +1,4 @@
-export const commentColors: any = {
+export const commentColors: { [key: string]: { bg: string; text: string; title: string } } = {
   orange: {
     bg: 'border-l-4 pl-4 border-orange-500 bg-orange-100 border-orange-600 dark:bg-gray-800',
     text: 'dark:text-orange-200 text-gray-700',

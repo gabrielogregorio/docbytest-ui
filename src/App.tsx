@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, ReactElement } from 'react';
 import { Aside } from './components/widgets/aside';
 import { DataContext } from './core/contexts/dataProvider';
 import { MenuContext } from './core/contexts/menuProvider';
@@ -9,7 +9,7 @@ import { useFetchDocsAndSaveContext } from './core/hooks/useFetchDocsAndSaveCont
 import { Main } from './components/layout/main';
 import { DocTests } from './components/widgets/docTests';
 
-const App = () => {
+const App = (): ReactElement => {
   const { docSelected, setDocSelected } = useContext(DocSelectedContext);
   const { docs } = useContext(DataContext);
   const { setMenuIsOpen } = useContext(MenuContext);
@@ -22,7 +22,7 @@ const App = () => {
 
   useEffect(() => {
     if (docs?.length) {
-      const setFirstDoc = () => {
+      const setFirstDoc = (): void => {
         setDocSelected({
           tests: [],
           idContent: `${docs[0]?.title}${docs[0]?.docs?.[0]?.title}`,

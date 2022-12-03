@@ -1,14 +1,17 @@
-export const GroupExplainedHeaders = ({ headers }: { headers: any }) => {
-  const headersKey = Object.keys(headers);
+import { ReactElement } from 'react';
+import { contentRequestType } from '../../core/interfaces/api';
+
+export const GroupExplainedHeaders = ({ headers }: { headers: contentRequestType }): ReactElement => {
+  const headersKey: string[] = Object.keys(headers);
 
   if (headersKey.length === 0) {
-    return null;
+    return <div />;
   }
   return (
     <div>
       <h3 className="uppercase mb-2 font-semibold text-gray-500">Headers</h3>
       <div className="rounded-md border-2">
-        {headersKey.map((headerKey: any) => {
+        {headersKey.map((headerKey: string) => {
           return (
             <div className="bg-white p-3">
               <div>

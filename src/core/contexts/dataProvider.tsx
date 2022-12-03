@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from 'react';
+import { Context, createContext, ReactElement, ReactNode, useMemo, useState } from 'react';
 import { apiDocsType, apiResponseDocType, apiResponseFileTypes } from '../interfaces/api';
 
 type DataContextType = {
@@ -7,9 +7,9 @@ type DataContextType = {
   docs: apiDocsType[];
 };
 
-export const DataContext = createContext({} as DataContextType);
+export const DataContext: Context<DataContextType> = createContext({} as DataContextType);
 
-export const DataProvider = ({ children }: any) => {
+export const DataProvider = ({ children }: { children: ReactNode }): ReactElement => {
   const [suites, setSuites] = useState<apiResponseFileTypes[]>([]);
   const [docs, setDocs] = useState<apiDocsType[]>([]);
 
@@ -18,7 +18,7 @@ export const DataProvider = ({ children }: any) => {
     setDocs(data.docs);
   };
 
-  const value = useMemo(() => ({ setData, docs, suites }), [docs, suites]);
+  const value: DataContextType = useMemo(() => ({ setData, docs, suites }), [docs, suites]);
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };

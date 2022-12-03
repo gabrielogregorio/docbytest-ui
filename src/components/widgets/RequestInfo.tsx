@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { GroupMethodRequestAndUrls } from './groupInputParams';
 import {
   mountCurlRequest,
@@ -18,14 +18,14 @@ const mountCurlRequestOrchestrator = (
   method: string,
   path: string,
   sendContent: contentRequestType,
-) => {
+): string => {
   if (!method) {
     return '';
   }
 
-  const mountParams = mountUrlParams(urlParams);
-  const mountQuery = mountQueryParams(queryParams);
-  const mountHeaders = mountHeadersParams(headers);
+  const mountParams: string = mountUrlParams(urlParams);
+  const mountQuery: string = mountQueryParams(queryParams);
+  const mountHeaders: string = mountHeadersParams(headers);
 
   return mountCurlRequest({
     method,
@@ -37,18 +37,18 @@ const mountCurlRequestOrchestrator = (
   });
 };
 
-export const RequestInfo = ({ testRunner }: { testRunner: InitialTestRunnerType }) => {
-  const queryParams = testRunner?.parameters?.filter((item: paramsType) => item.in === 'query');
-  const urlParams = testRunner?.parameters?.filter((item: paramsType) => item.in === 'param');
+export const RequestInfo = ({ testRunner }: { testRunner: InitialTestRunnerType }): ReactElement => {
+  const queryParams: paramsType[] = testRunner?.parameters?.filter((item: paramsType) => item.in === 'query');
+  const urlParams: paramsType[] = testRunner?.parameters?.filter((item: paramsType) => item.in === 'param');
   const { headers, method, path, sendContent } = testRunner ?? {};
   const [body, setBody] = useState<string>('');
-  const [response, setResponse] = useState<contentRequestType>('');
+  const [response, setResponse] = useState<contentRequestType>({});
 
   useEffect(() => {
     if (testRunner?.response) {
       setResponse(testRunner?.response?.body);
     } else {
-      setResponse('');
+      setResponse({});
     }
   }, [testRunner?.response]);
 

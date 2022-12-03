@@ -18,10 +18,10 @@
     "dev": "ESLINT_NO_DEV_ERRORS='true' react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "jest": "react-scripts test --watchAll=false",
+    "jest": "react-scripts test --watchAll=false --passWithNoTests",
     "jest:coverage": "react-scripts test --watchAll=false --coverage",
     "jest:watchAll": "react-scripts test --watchAll=true",
-    "tsc-check": "tsc --noEmit",
+    "check": "tsc -p .",
     "lint": "eslint -c ./.eslintrc.json --ext '.ts' 'src/**'",
     "prepare": "husky install"
   },
@@ -63,6 +63,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-sonarjs": "^0.16.0",
+    "eslint-plugin-spellcheck": "^0.0.20",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.4",
     "postcss": "^8.4.14",
@@ -84,8 +86,8 @@
     ]
   },
   "lint-staged": {
-    "src/**/*.{js,ts}": [
-      "npm run tsc-check",
+    "src/**/*.{ts,tsx}": [
+      "bash -c tsc -p",
       "npm run lint",
       "npm run jest"
     ]
