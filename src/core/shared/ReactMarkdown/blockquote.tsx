@@ -14,8 +14,7 @@ const getNameColor = (stringElement: string): string => {
   const resultsColor: RegExpMatchArray | null = stringElement.match(reColor);
   let color: string = '';
   if (resultsColor) {
-    // eslint-disable-next-line prefer-destructuring
-    color = resultsColor[1];
+    [, color] = resultsColor;
   }
   return color;
 };
@@ -26,8 +25,7 @@ const getTitle = (stringElement: string): string => {
   const results: RegExpExecArray | null = reTitleFinal.exec(stringElement);
   let titleFinal: string = '';
   if (results) {
-    // eslint-disable-next-line prefer-destructuring
-    titleFinal = results[1];
+    [, titleFinal] = results;
   }
 
   return titleFinal;

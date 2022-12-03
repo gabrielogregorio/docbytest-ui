@@ -16,9 +16,6 @@ type boardViewerProps = {
 
 const JSON_SPACING: number = 4;
 
-// lowercase comment
-// Capitalized comment
-
 export const BoardViewer = ({ response, title, type, titleBase }: boardViewerProps): ReactElement => {
   const jsonParsed: string = type === 'json' ? JSON.stringify(response, null, JSON_SPACING) : (response as string);
 
