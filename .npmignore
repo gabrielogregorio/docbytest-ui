@@ -8,6 +8,7 @@ tailwind.config.js
 tsconfig.json
 README.md
 src
+docs
 cypress
 coverage
 cypress.config.ts
