@@ -14,8 +14,10 @@ type boardViewerProps = {
   titleBase: string;
 };
 
+const JSON_SPACING: number = 4;
+
 export const BoardViewer = ({ response, title, type, titleBase }: boardViewerProps): ReactElement => {
-  const jsonParsed: string = type === 'json' ? JSON.stringify(response, null, 4) : (response as string);
+  const jsonParsed: string = type === 'json' ? JSON.stringify(response, null, JSON_SPACING) : (response as string);
 
   return (
     <div>

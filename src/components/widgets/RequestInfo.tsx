@@ -18,6 +18,7 @@ const mountCurlRequestOrchestrator = (
   method: string,
   path: string,
   sendContent: contentRequestType,
+  // eslint-disable-next-line max-params
 ): string => {
   if (!method) {
     return '';

@@ -50,6 +50,7 @@ type mountCurlRequestType = {
   mountHeaders: string;
 };
 
+const JSON_SPACING: number = 2;
 export const mountCurlRequest = ({
   method,
   path,
@@ -59,7 +60,7 @@ export const mountCurlRequest = ({
   mountHeaders,
 }: mountCurlRequestType): string => {
   const { currentUrlOrigin } = getUrlApi();
-  const sendContentMounted: string = `'${JSON.stringify(sendContent, null, 2).replaceAll("'", '"')}'`;
+  const sendContentMounted: string = `'${JSON.stringify(sendContent, null, JSON_SPACING).replaceAll("'", '"')}'`;
   const linkRequest: string = `${currentUrlOrigin}${path}/${mountParams || ''}${
     mountQuery.slice(0, mountQuery.length - 1) || ''
   }`;
