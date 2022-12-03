@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "docbytest",
+  "name": "generate docs by test",
   "icons": [
     {
       "src": "favicon.ico",

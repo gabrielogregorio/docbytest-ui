@@ -1,4 +1,3 @@
-import { generateIds } from '../../core/shared/generateIds';
 import { MethodRequestAndUrl } from './methodRequestAndUrl';
 
 export const GroupInputHeaders = ({ headers }: { headers: any }) => {
@@ -9,7 +8,7 @@ export const GroupInputHeaders = ({ headers }: { headers: any }) => {
       {Object.keys(headers).map((keyRunner) => {
         return (
           <MethodRequestAndUrl
-            key={generateIds()}
+            key={headers?.[keyRunner]?.toString()}
             label={keyRunner}
             name="auth"
             type="text"

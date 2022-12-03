@@ -20,6 +20,7 @@ const getNameColor = (stringElement: string) => {
   const resultsColor = stringElement.match(reColor);
   let color = '';
   if (resultsColor) {
+    // eslint-disable-next-line prefer-destructuring
     color = resultsColor[1];
   }
   return color;
@@ -30,6 +31,7 @@ const getTitle = (stringElement: string) => {
   const results = reTitleFinal.exec(stringElement);
   let titleFinal = '';
   if (results) {
+    // eslint-disable-next-line prefer-destructuring
     titleFinal = results[1];
   }
 

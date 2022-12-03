@@ -1,6 +1,6 @@
 {
   "name": "docbytest-ui",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "homepage": "/docs",
   "private": false,
   "main": "build/index.js",
@@ -12,9 +12,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^15.5.0",
-    "remark-gfm": "^3.0.1",
-    "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "remark-gfm": "^3.0.1"
   },
   "scripts": {
     "dev": "ESLINT_NO_DEV_ERRORS='true' react-scripts start",
