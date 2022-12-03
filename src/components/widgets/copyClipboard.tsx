@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { IconCopyClipboard } from '../../icons';
 import { copyToClipboard } from '../../core/helpers/clipboard';
 
@@ -6,24 +6,26 @@ type copyClipboardType = {
   dataToCopy: string;
 };
 
-export const CopyClipboard = ({ dataToCopy }: copyClipboardType) => {
+export const CopyClipboard = ({ dataToCopy }: copyClipboardType): ReactElement => {
   const [recentClickCopyItem, setRecentClickCopyItem] = useState<boolean>(false);
 
   useEffect(() => {
-    let id: any;
+    const TIME_IN_MS_TO_HIDDEN_COPY: number = 900;
+    let idTimeout: number;
     if (recentClickCopyItem) {
-      id = setTimeout(() => {
+      // @ts-ignore
+      idTimeout = setTimeout(() => {
         setRecentClickCopyItem(false);
-      }, 900);
+      }, TIME_IN_MS_TO_HIDDEN_COPY);
     }
 
-    return () => clearTimeout(id);
+    return () => clearTimeout(idTimeout);
   }, [recentClickCopyItem]);
 
   return (
     <button
       type="button"
-      onClick={() => {
+      onClick={(): void => {
         copyToClipboard(dataToCopy);
         setRecentClickCopyItem(true);
       }}

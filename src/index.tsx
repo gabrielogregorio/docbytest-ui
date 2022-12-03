@@ -8,7 +8,7 @@ import App from './App';
 import { DocSelectedProvider } from './core/contexts/docSelectedProvider';
 import { ThemeProvider } from './core/contexts/themProvider';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root: ReactDOM.Root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <DocSelectedProvider>

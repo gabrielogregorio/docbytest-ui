@@ -1,9 +1,9 @@
-import { createContext, ReactNode, useMemo, useState } from 'react';
+import { Context, createContext, ReactElement, ReactNode, useMemo, useState } from 'react';
 
 type themeType = 'white' | 'dark';
 
-const nameThemeApiDocs = 'themeApiDocbytest';
-const themeApiDocbytest = localStorage.getItem(nameThemeApiDocs) || 'dark';
+const nameThemeApiDocs: string = 'themeApiDocbytest';
+const themeApiDocbytest: string = localStorage.getItem(nameThemeApiDocs) || 'dark';
 
 const initialStateTheme: themeType = themeApiDocbytest === 'dark' ? 'dark' : 'white';
 
@@ -12,12 +12,12 @@ type themeContextType = {
   toggleTheme: () => void;
 };
 
-export const ThemeContext = createContext({} as themeContextType);
+export const ThemeContext: Context<themeContextType> = createContext({} as themeContextType);
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }): ReactElement => {
   const [theme, setTheme] = useState<themeType>(initialStateTheme);
 
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     if (theme === 'dark') {
       localStorage.setItem(nameThemeApiDocs, 'white');
       setTheme('white');
@@ -27,7 +27,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const value = useMemo(() => ({ theme, toggleTheme }), [theme]);
+  const value: themeContextType = useMemo(() => ({ theme, toggleTheme }), [theme]);
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };

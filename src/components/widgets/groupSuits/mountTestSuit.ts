@@ -22,18 +22,18 @@ export const mountTestSuit = ({
   const listItems: groupCasesType[] = [];
 
   suites?.forEach((file: apiResponseFileTypes) => {
-    const keysPaths = Object.keys(file.paths);
+    const keysPaths: string[] = Object.keys(file.paths);
     const listBase: listBaseType[] = [];
 
     keysPaths?.forEach((path: string, indexPath: number) => {
-      const methods = Object.keys(file.paths[path]);
+      const methods: string[] = Object.keys(file.paths[path]);
 
       methods.forEach((method: string, indexMethod: number) => {
         const tests: testBaseObjectType = file.paths[path][method];
-        const testsSorted = sortTestByStatusCode(tests);
+        const testsSorted: testsType[] = sortTestByStatusCode(tests);
 
         const { method: localMethod, title } = testsSorted[0] ?? {};
-        const isSelected = docSelected?.idContent === `${file.title}-${indexPath}-${indexMethod}`;
+        const isSelected: boolean = docSelected?.idContent === `${file.title}-${indexPath}-${indexMethod}`;
 
         listBase.push({
           id: `${file.title}-${indexPath}-${indexMethod}`,

@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from 'react';
+import { Context, createContext, ReactElement, ReactNode, useMemo, useState } from 'react';
 import { testsType } from '../interfaces/api';
 
 export type initialStateDocSelectedType = {
@@ -21,16 +21,19 @@ type DocSelectedContextType = {
   resetDocSelected: Function;
 };
 
-export const DocSelectedContext = createContext({} as DocSelectedContextType);
+export const DocSelectedContext: Context<DocSelectedContextType> = createContext({} as DocSelectedContextType);
 
-export const DocSelectedProvider = ({ children }: any) => {
+export const DocSelectedProvider = ({ children }: { children: ReactNode }): ReactElement => {
   const [docSelected, setDocSelected] = useState<typeof initialStateDocSelected>(initialStateDocSelected);
 
-  function resetDocSelected() {
+  const resetDocSelected = (): void => {
     setDocSelected(initialStateDocSelected);
-  }
+  };
 
-  const value = useMemo(() => ({ docSelected, setDocSelected, resetDocSelected }), [docSelected]);
+  const value: DocSelectedContextType = useMemo(
+    () => ({ docSelected, setDocSelected, resetDocSelected }),
+    [docSelected],
+  );
 
   return <DocSelectedContext.Provider value={value}>{children}</DocSelectedContext.Provider>;
 };

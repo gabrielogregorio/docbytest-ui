@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { ReactElement, useContext } from 'react';
 import { DataContext } from '../../../core/contexts/dataProvider';
 import { DocSelectedContext } from '../../../core/contexts/docSelectedProvider';
 import { testsType } from '../../../core/interfaces/api';
@@ -21,7 +21,7 @@ export type groupCasesType = {
   description: string;
 };
 
-export const GroupSuits = ({ filter }: { filter: string }) => {
+export const GroupSuits = ({ filter }: { filter: string }): ReactElement => {
   const { docSelected } = useContext(DocSelectedContext);
   const { suites, docs } = useContext(DataContext);
 
@@ -29,12 +29,14 @@ export const GroupSuits = ({ filter }: { filter: string }) => {
 
   return (
     <>
-      {groupCases.map((groupCase): any => {
-        const filterNormalized = normalizeStrings(filter);
+      {groupCases.map((groupCase: groupCasesType): ReactElement => {
+        const filterNormalized: string = normalizeStrings(filter);
 
-        const insideTitle = groupCase.listBase.map((item) => item.title).join('');
+        const insideTitle: string = groupCase.listBase
+          .map((item: groupCasesType['listBase'][0]): string => item.title)
+          .join('');
 
-        const notExistsMatchFilterInRouterOrTexts =
+        const notExistsMatchFilterInRouterOrTexts: boolean =
           !normalizeStrings(groupCase.description).includes(filterNormalized) &&
           !normalizeStrings(groupCase.title).includes(filterNormalized) &&
           !normalizeStrings(insideTitle).includes(filterNormalized);

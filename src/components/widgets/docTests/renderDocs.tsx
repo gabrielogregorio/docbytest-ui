@@ -1,10 +1,10 @@
-import { useContext } from 'react';
+import { ReactElement, useContext } from 'react';
 import { DataContext } from '../../../core/contexts/dataProvider';
 import { DocSelectedContext } from '../../../core/contexts/docSelectedProvider';
 import { apiDocsType, docItemType } from '../../../core/interfaces/api';
 import { InterpreterMarkdown } from '../../interpreterMarkdown';
 
-export const RenderDocs = () => {
+export const RenderDocs = (): ReactElement => {
   const { docs } = useContext(DataContext);
   const { docSelected } = useContext(DocSelectedContext);
 
@@ -12,7 +12,7 @@ export const RenderDocs = () => {
     <>
       {docs.map((doc: apiDocsType) => {
         return doc?.docs?.map((docItem: docItemType) => {
-          const docNotHasSelected = !docSelected.idContent.endsWith(docItem.title);
+          const docNotHasSelected: boolean = !docSelected.idContent.endsWith(docItem.title);
           if (docNotHasSelected) {
             return null;
           }

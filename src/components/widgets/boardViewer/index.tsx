@@ -1,18 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactElement } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { contentRequestType } from '../../../core/interfaces/api';
 import { CopyClipboard } from '../copyClipboard';
 
 type typeType = 'json' | 'bash';
 
 type boardViewerProps = {
   type: typeType;
-  response: any;
+  response: contentRequestType | string;
   title: string;
   titleBase: string;
 };
 
-export const BoardViewer = ({ response, title, type, titleBase }: boardViewerProps) => {
-  const jsonParsed = type === 'json' ? JSON.stringify(response, null, 4) : response;
+export const BoardViewer = ({ response, title, type, titleBase }: boardViewerProps): ReactElement => {
+  const jsonParsed: string = type === 'json' ? JSON.stringify(response, null, 4) : (response as string);
 
   return (
     <div>

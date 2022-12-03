@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/typedef */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unstable-nested-components */
 import { ReactElement, ReactNode } from 'react';
@@ -15,10 +16,11 @@ const getTextFromReactNode = (node: ReactNode): string | number => {
   return '';
 };
 
-const getNameColor = (stringElement: string) => {
-  const reColor = /(.{3,200}?)#/;
-  const resultsColor = stringElement.match(reColor);
-  let color = '';
+// FIXME: this is bad
+const getNameColor = (stringElement: string): string => {
+  const reColor: RegExp = /(.{3,200}?)#/;
+  const resultsColor: RegExpMatchArray | null = stringElement.match(reColor);
+  let color: string = '';
   if (resultsColor) {
     // eslint-disable-next-line prefer-destructuring
     color = resultsColor[1];
@@ -26,10 +28,11 @@ const getNameColor = (stringElement: string) => {
   return color;
 };
 
-const getTitle = (stringElement: string) => {
-  const reTitleFinal = /.{0,200}?#(.*)/;
-  const results = reTitleFinal.exec(stringElement);
-  let titleFinal = '';
+// FIXME: this is bad
+const getTitle = (stringElement: string): string => {
+  const reTitleFinal: RegExp = /.{0,200}?#(.*)/;
+  const results: RegExpExecArray | null = reTitleFinal.exec(stringElement);
+  let titleFinal: string = '';
   if (results) {
     // eslint-disable-next-line prefer-destructuring
     titleFinal = results[1];
@@ -100,7 +103,7 @@ export const MarkdownToHtml = ({ body }: { body: string }): ReactElement => {
           ),
 
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          code: ({ node, inline, className, children, ...props }) => {
+          code: ({ node, inline, className, children, ...props }): ReactElement => {
             const match = /language-(\w+)/.exec(className || '');
             const language = match?.[1];
             const removeLastBreakLine = String(children).replace(/\n$/, '');
@@ -108,14 +111,10 @@ export const MarkdownToHtml = ({ body }: { body: string }): ReactElement => {
             return (
               <span className="codeFont">
                 {!inline && match ? (
-                  <SyntaxHighlighter
-                    // eslint-disable-next-line react/no-children-prop
-                    children={removeLastBreakLine}
-                    style={dracula as any}
-                    language={language}
-                    PreTag="div"
-                    {...props}
-                  />
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  <SyntaxHighlighter style={dracula as any} language={language} PreTag="div" {...props}>
+                    {removeLastBreakLine}
+                  </SyntaxHighlighter>
                 ) : (
                   <code className={className} {...props}>
                     {children}
@@ -125,7 +124,7 @@ export const MarkdownToHtml = ({ body }: { body: string }): ReactElement => {
             );
           },
 
-          blockquote: ({ children }) => {
+          blockquote: ({ children }): ReactElement => {
             const stringElement: string = getTextFromReactNode(children).toString();
 
             const titleFinal = getTitle(stringElement);

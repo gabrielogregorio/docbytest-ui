@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
 import { DocSelectedContext } from '../../../core/contexts/docSelectedProvider';
 import { getUrlApi } from '../../../core/hooks/getUrlApi';
 import { testsType } from '../../../core/interfaces/api';
@@ -9,7 +9,7 @@ import { MethodRequestAndUrl } from '../methodRequestAndUrl';
 import { RenderTests } from '../renderTests';
 import { RequestInfo } from '../RequestInfo';
 
-export const RenderTest = () => {
+export const RenderTest = (): ReactElement => {
   const { docSelected } = useContext(DocSelectedContext);
   const testsSelectedItem: testsType[] = docSelected?.tests;
   const [testRunner, setTestSelected] = useState<InitialTestRunnerType>({

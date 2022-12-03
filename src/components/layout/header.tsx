@@ -1,13 +1,13 @@
-import { useContext } from 'react';
+import { ReactElement, useContext } from 'react';
 import { IconDark, IconLight, IconMenu } from '../../icons';
 import { ThemeContext } from '../../core/contexts/themProvider';
 import Logo from '../../assets/logo.png';
 import { MenuContext } from '../../core/contexts/menuProvider';
 
-export const Header = () => {
+export const Header = (): ReactElement => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { toggleMenuIsOpen } = useContext(MenuContext);
-  const styleTheme = theme === 'white' ? 'left-0' : 'translate-x-10';
+  const styleTheme: string = theme === 'white' ? 'left-0' : 'translate-x-10';
 
   return (
     <div
@@ -18,7 +18,7 @@ export const Header = () => {
           <button
             type="button"
             id="expand-menu"
-            onClick={() => toggleMenuIsOpen()}
+            onClick={(): void => toggleMenuIsOpen()}
             className="mr-2 lg:hidden border border-gray-300 dark:border-cyan-700 bg-white dark:bg-cyan-600 rounded-full p-2 text-cyan-600 dark:text-white">
             <IconMenu />
           </button>
@@ -36,7 +36,7 @@ export const Header = () => {
           <button
             type="button"
             data-testid="change-theme"
-            onClick={() => toggleTheme()}
+            onClick={(): void => toggleTheme()}
             className="bg-cyan-700 dark:bg-cyan-600 dark:ring-cyan-600 ring-cyan-700 ring-2 w-16 flex rounded-xl relative">
             <div
               className={`h-full aspect-square rounded-full bg-white absolute transition-all duration-150 top-0 ${styleTheme}`}

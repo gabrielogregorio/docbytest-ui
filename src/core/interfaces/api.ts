@@ -1,18 +1,18 @@
-export enum parametersInEnum {
+export enum ParametersInEnum {
   query = 'query',
   param = 'param',
 }
 export type parametersExampleType = string | number | boolean;
 
 export type paramsType = {
-  in: parametersInEnum;
+  in: ParametersInEnum;
   name: string;
   example: parametersExampleType;
   variable: string;
   type: string;
 };
 
-export type contentRequestType = string | number | boolean | object;
+export type contentRequestType = { [key: string]: string };
 
 export type testsType = {
   method: string;

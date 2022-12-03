@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { parametersExampleType } from '../../core/interfaces/api';
 import { CopyClipboard } from './copyClipboard';
 
@@ -9,7 +9,7 @@ type MethodRequestAndUrlType = {
   label: string | ReactNode;
 };
 
-export const MethodRequestAndUrl = ({ type, name, value, label }: MethodRequestAndUrlType) => {
+export const MethodRequestAndUrl = ({ type, name, value, label }: MethodRequestAndUrlType): ReactElement => {
   return (
     <div className="flex items-center dark:bg-[#282A36] my-2 bg-[#282A36] text-gray-700 overflow-x-auto">
       <label className="font-bold mr-3 flex w-full" htmlFor={name}>

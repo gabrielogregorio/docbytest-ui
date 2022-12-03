@@ -12,8 +12,8 @@ export const mountDocs = ({
   const listItems: groupCasesType[] = [];
 
   docs.forEach((doc: apiDocsType) => {
-    const mountListBase = doc.docs.map((item: docItemType) => {
-      const indexTitleAndTest = `${doc.title}${item.title}`;
+    const mountListBase: groupCasesType['listBase'] = doc.docs.map((item: docItemType) => {
+      const indexTitleAndTest: string = `${doc.title}${item.title}`;
 
       return {
         ...item,

@@ -1,4 +1,4 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useMemo, useState } from 'react';
+import { Context, createContext, Dispatch, ReactElement, ReactNode, SetStateAction, useMemo, useState } from 'react';
 
 type menuContextType = {
   menuIsOpen: boolean;
@@ -6,16 +6,19 @@ type menuContextType = {
   toggleMenuIsOpen: () => void;
 };
 
-export const MenuContext = createContext({} as menuContextType);
+export const MenuContext: Context<menuContextType> = createContext({} as menuContextType);
 
-export const MenuProvider = ({ children }: { children: ReactNode }) => {
+export const MenuProvider = ({ children }: { children: ReactNode }): ReactElement => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
 
   const toggleMenuIsOpen = (): void => {
-    setMenuIsOpen((prev) => !prev);
+    setMenuIsOpen((prev: boolean) => !prev);
   };
 
-  const value = useMemo(() => ({ menuIsOpen, setMenuIsOpen, toggleMenuIsOpen }), [menuIsOpen, toggleMenuIsOpen]);
+  const value: menuContextType = useMemo(
+    () => ({ menuIsOpen, setMenuIsOpen, toggleMenuIsOpen }),
+    [menuIsOpen, toggleMenuIsOpen],
+  );
 
   return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
 };

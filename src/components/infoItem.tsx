@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { BadgeMethod } from './widgets/badgeMethod';
 
 type badgeType = { [method: string]: { text: string } };
@@ -28,17 +29,17 @@ export const InfoItem = ({
   method,
 }: {
   isSelected: boolean;
-  onClick: any;
+  onClick: () => void;
   localMethod: string;
   title: string;
   method: string;
-}) => {
+}): ReactElement => {
   const { text } = dataBadge?.[method] ?? dataBadge.default;
-  const isSelectedStyle = isSelected ? 'dark:bg-gray-800 bg-gray-100' : '';
+  const isSelectedStyle: string = isSelected ? 'dark:bg-gray-800 bg-gray-100' : '';
   return (
     <li>
       <div className={`text-gray-700 p-1.5  ${isSelectedStyle}`}>
-        <button type="button" onClick={() => onClick()} className=" flex w-full cursor-pointer text-left">
+        <button type="button" onClick={(): void => onClick()} className=" flex w-full cursor-pointer text-left">
           <div className="flex items-center flex-1">
             <BadgeMethod method={localMethod} />
             <p
