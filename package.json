@@ -20,7 +20,9 @@
     "eject": "react-scripts eject",
     "jest": "react-scripts test --watchAll=false",
     "jest:coverage": "react-scripts test --watchAll=false --coverage",
-    "jest:watchAll": "react-scripts test --watchAll=true"
+    "jest:watchAll": "react-scripts test --watchAll=true",
+    "tsc-check": "tsc --noEmit",
+    "lint": "eslint -c ./.eslintrc.json --ext '.ts' 'src/**'"
   },
   "eslintConfig": {
     "extends": [
