@@ -86,7 +86,8 @@
           "docbytest",
           "urls",
           "orchestrator",
-          "globals"
+          "globals",
+          "matchers"
         ],
         "minLength": 3
       }
