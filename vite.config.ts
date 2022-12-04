@@ -8,13 +8,11 @@ export default defineConfig({
     outDir: 'build',
   },
   resolve: {
-    alias: [
-      {
-        find: 'common',
-        replacement: resolve(__dirname, 'src/common'),
-      },
-    ],
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
   },
+  // @ts-ignore
   test: {
     css: false,
     coverage: {
