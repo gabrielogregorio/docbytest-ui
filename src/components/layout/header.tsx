@@ -1,7 +1,6 @@
 import { ReactElement, useContext } from 'react';
 import { IconDark, IconLight, IconMenu } from '../../icons';
 import { ThemeContext } from '../../core/contexts/themProvider';
-import Logo from '../../assets/logo.png';
 import { MenuContext } from '../../core/contexts/menuProvider';
 
 export const Header = (): ReactElement => {
@@ -24,7 +23,7 @@ export const Header = (): ReactElement => {
           </button>
 
           <div className="mr-2">
-            <img src={Logo} alt="Logo do docbytet" className="hidden sm:block sm:w-[40px] sm:h-[29px]" />
+            <img src="/logo.png" alt="Logo do docbytet" className="hidden sm:block sm:w-[40px] sm:h-[29px]" />
           </div>
 
           <div id="main-title">docbytest</div>

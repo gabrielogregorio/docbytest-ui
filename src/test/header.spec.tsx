@@ -28,17 +28,17 @@ describe('Header Context', () => {
       </ThemeProvider>,
     );
 
-    expect(screen.queryByText('theme dark')).toBeInTheDocument();
-    expect(screen.queryByText('menuIsOpen false')).toBeInTheDocument();
+    expect(screen.queryByText('theme dark') as HTMLElement).toBeInTheDocument();
+    expect(screen.queryByText('menuIsOpen false') as HTMLElement).toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId('change-theme'));
 
-    expect(screen.queryByText('theme white')).toBeInTheDocument();
-    expect(screen.queryByText('menuIsOpen false')).toBeInTheDocument();
+    expect(screen.queryByText('theme white') as HTMLElement).toBeInTheDocument();
+    expect(screen.queryByText('menuIsOpen false') as HTMLElement).toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId('change-theme'));
 
-    expect(screen.queryByText('theme dark')).toBeInTheDocument();
-    expect(screen.queryByText('menuIsOpen false')).toBeInTheDocument();
+    expect(screen.queryByText('theme dark') as HTMLElement).toBeInTheDocument();
+    expect(screen.queryByText('menuIsOpen false') as HTMLElement).toBeInTheDocument();
   });
 });

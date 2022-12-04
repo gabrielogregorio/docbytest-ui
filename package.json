@@ -1,6 +1,6 @@
 {
   "name": "docbytest-ui",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "homepage": "/docs",
   "private": false,
   "main": "build/index.js",
@@ -10,25 +10,24 @@
     "react-icons": "^4.3.1",
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "remark-gfm": "^3.0.1"
   },
   "scripts": {
-    "dev": "ESLINT_NO_DEV_ERRORS='true' react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
-    "jest": "react-scripts test --watchAll=false --passWithNoTests",
-    "jest:coverage": "react-scripts test --watchAll=false --coverage",
-    "jest:watchAll": "react-scripts test --watchAll=true",
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest",
+    "test:commit": "vitest --passWithNoTests --watch=false",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage --watch=false",
+    "preview": "vite preview",
     "check": "tsc -p .",
     "lint": "eslint -c ./.eslintrc.json --ext '.ts' 'src/**'",
     "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -46,9 +45,9 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@types/jest": "^28.1.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/node": "^17.0.42",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
@@ -56,7 +55,10 @@
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
-    "autoprefixer": "^10.4.7",
+    "@vitejs/plugin-react": "^2.0.1",
+    "@vitest/coverage-c8": "^0.25.3",
+    "@vitest/ui": "^0.25.3",
+    "autoprefixer": "^10.4.13",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.16.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -67,29 +69,18 @@
     "eslint-plugin-spellcheck": "^0.0.20",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.4",
-    "postcss": "^8.4.14",
+    "postcss": "^8.4.19",
     "prettier": "^2.6.2",
-    "tailwindcss": "^3.0.24",
-    "typescript": "^4.6.4"
-  },
-  "jest": {
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
-    ],
-    "transform": {
-      "^.+\\.[jt]sx?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ]
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.7",
+    "vitest": "^0.25.3"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
       "bash -c tsc -p",
       "npm run lint",
-      "npm run jest"
+      "npm run test:commit"
     ]
   }
 }
