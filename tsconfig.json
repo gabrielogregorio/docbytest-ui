@@ -17,6 +17,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "baseUrl": "./",
+    "paths": {
+      "@/components/*": ["src/components/*"]
+    },
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,

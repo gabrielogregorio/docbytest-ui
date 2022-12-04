@@ -76,7 +76,18 @@
         "templates": false,
         "identifiers": true,
         "lang": "en_US",
-        "skipWords": ["Gfm", "dracula", "href", "blockquote", "enum", "testid", "docbytest", "urls", "orchestrator"],
+        "skipWords": [
+          "Gfm",
+          "dracula",
+          "href",
+          "blockquote",
+          "enum",
+          "testid",
+          "docbytest",
+          "urls",
+          "orchestrator",
+          "globals"
+        ],
         "minLength": 3
       }
     ],
