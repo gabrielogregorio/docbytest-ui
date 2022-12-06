@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { IconCopyClipboard } from '../../icons';
-import { copyToClipboard } from '../../core/helpers/clipboard';
+import { copyToClipboard } from '@/helpers/clipboard';
+import { IconCopyClipboard } from '@/icons/index';
 
 type copyClipboardType = {
   dataToCopy: string;

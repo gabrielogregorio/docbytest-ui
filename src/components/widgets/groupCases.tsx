@@ -1,8 +1,8 @@
 import { ReactElement, useContext } from 'react';
-import { DocSelectedContext } from '../../core/contexts/docSelectedProvider';
-import { testsType } from '../../core/interfaces/api';
-import { InfoItem } from '../infoItem';
-import { InfoHeader } from '../infoHeader';
+import { testsType } from '@/interfaces/api';
+import { DocSelectedContext } from '@/contexts/docSelectedProvider';
+import { InfoItem } from '@/components/infoItem';
+import { InfoHeader } from '@/components/infoHeader';
 
 type groupCasesType = {
   title: string;

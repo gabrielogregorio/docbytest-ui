@@ -1,5 +1,5 @@
-import { getUrlApi } from '../hooks/getUrlApi';
-import { contentRequestType, paramsType } from '../interfaces/api';
+import { getUrlApi } from '@/hooks/getUrlApi';
+import { contentRequestType, paramsType } from '@/interfaces/api';
 
 export const mountUrlParams = (urlParams: paramsType[]): string => {
   let mountParams: string = '';

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { paramsType } from '../../core/interfaces/api';
+import { paramsType } from '@/interfaces/api';
 
 export const GroupExplainedParams = ({ params, title }: { params: paramsType[]; title: string }): ReactElement => {
   if (params.length === 0) {

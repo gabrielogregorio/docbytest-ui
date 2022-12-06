@@ -1,5 +1,5 @@
 import { Context, createContext, ReactElement, ReactNode, useMemo, useState } from 'react';
-import { testsType } from '../interfaces/api';
+import { testsType } from '@/interfaces/api';
 
 export type initialStateDocSelectedType = {
   tests: testsType[];

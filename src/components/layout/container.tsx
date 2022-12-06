@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode, useContext } from 'react';
-import { ThemeContext } from '../../core/contexts/themProvider';
+import { ThemeContext } from '@/contexts/themProvider';
 
 export const Container = ({ children }: { children: ReactNode }): ReactElement => {
   const { theme } = useContext(ThemeContext);

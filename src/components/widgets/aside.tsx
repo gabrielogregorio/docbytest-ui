@@ -1,5 +1,5 @@
 import { useState, useContext, ChangeEvent, ReactElement } from 'react';
-import { MenuContext } from '../../core/contexts/menuProvider';
+import { MenuContext } from '@/contexts/menuProvider';
 import { GroupSuits } from './groupSuits';
 
 export const Aside = (): ReactElement => {

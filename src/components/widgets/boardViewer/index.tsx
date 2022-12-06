@@ -2,8 +2,8 @@
 import { ReactElement } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { contentRequestType } from '../../../core/interfaces/api';
-import { CopyClipboard } from '../copyClipboard';
+import { contentRequestType } from '@/interfaces/api';
+import { CopyClipboard } from '@/widgets/copyClipboard';
 
 type typeType = 'json' | 'bash';
 

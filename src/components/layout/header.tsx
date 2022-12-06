@@ -1,7 +1,7 @@
 import { ReactElement, useContext } from 'react';
-import { IconDark, IconLight, IconMenu } from '../../icons';
-import { ThemeContext } from '../../core/contexts/themProvider';
-import { MenuContext } from '../../core/contexts/menuProvider';
+import { ThemeContext } from '@/contexts/themProvider';
+import { MenuContext } from '@/contexts/menuProvider';
+import { IconDark, IconLight, IconMenu } from '@/icons/index';
 
 export const Header = (): ReactElement => {
   const { theme, toggleTheme } = useContext(ThemeContext);

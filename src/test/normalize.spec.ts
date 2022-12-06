@@ -1,4 +1,4 @@
-import { normalizeStrings } from '../core/normalizers/strings';
+import { normalizeStrings } from '@/normalizers/strings';
 
 describe('Normalize', () => {
   it('should normalize string', () => {

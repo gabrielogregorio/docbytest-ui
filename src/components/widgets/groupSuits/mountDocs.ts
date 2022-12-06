@@ -1,6 +1,6 @@
+import { initialStateDocSelectedType } from '@/contexts/docSelectedProvider';
+import { apiDocsType, docItemType } from '@/interfaces/api';
 import { groupCasesType } from '.';
-import { initialStateDocSelectedType } from '../../../core/contexts/docSelectedProvider';
-import { apiDocsType, docItemType } from '../../../core/interfaces/api';
 
 export const mountDocs = ({
   docSelected,

@@ -1,13 +1,13 @@
 import { ReactElement, useContext, useEffect, useState } from 'react';
-import { DocSelectedContext } from '../../../core/contexts/docSelectedProvider';
-import { getUrlApi } from '../../../core/hooks/getUrlApi';
-import { testsType } from '../../../core/interfaces/api';
-import { InitialTestRunnerType } from '../../../core/interfaces/testRunner';
-import { InterpreterMarkdown } from '../../interpreterMarkdown';
-import { BadgeMethod } from '../badgeMethod';
-import { MethodRequestAndUrl } from '../methodRequestAndUrl';
-import { RenderTests } from '../renderTests';
-import { RequestInfo } from '../RequestInfo';
+import { DocSelectedContext } from '@/contexts/docSelectedProvider';
+import { getUrlApi } from '@/hooks/getUrlApi';
+import { testsType } from '@/interfaces/api';
+import { InitialTestRunnerType } from '@/interfaces/testRunner';
+import { InterpreterMarkdown } from '@/components/interpreterMarkdown';
+import { MethodRequestAndUrl } from '@/widgets/methodRequestAndUrl';
+import { BadgeMethod } from '@/widgets/badgeMethod';
+import { RenderTests } from '@/widgets/renderTests';
+import { RequestInfo } from '@/widgets/RequestInfo';
 
 export const RenderTest = (): ReactElement => {
   const { docSelected } = useContext(DocSelectedContext);

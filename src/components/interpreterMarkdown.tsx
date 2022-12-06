@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { MarkdownToHtml } from '../core/shared/ReactMarkdown';
+import { MarkdownToHtml } from '@/shared/ReactMarkdown';
 
 type InterpreterMarkdownInterface = {
   text: string;

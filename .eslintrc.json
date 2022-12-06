@@ -20,9 +20,7 @@
   "plugins": ["react", "spellcheck", "sonarjs", "import", "@typescript-eslint"],
   "settings": {
     "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
+      "typescript": {}
     }
   },
   "rules": {

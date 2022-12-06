@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
-import { testsType } from '../../core/interfaces/api';
-import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
+import { testsType } from '@/interfaces/api';
+import { InitialTestRunnerType } from '@/interfaces/testRunner';
 import { InsideMenu } from './insideMenu';
 
 type renderTestsType = {

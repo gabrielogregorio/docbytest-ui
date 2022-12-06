@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react';
-import { commentColors } from '../../helpers/colors';
+import { commentColors } from '@/helpers/colors';
 
 const getTextFromReactNode = (node: ReactNode): string | number => {
   if (typeof node === 'string' || typeof node === 'number') return node || '';

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { contentRequestType } from '../../core/interfaces/api';
+import { contentRequestType } from '@/interfaces/api';
 import { MethodRequestAndUrl } from './methodRequestAndUrl';
 
 export const GroupInputHeaders = ({ headers }: { headers: contentRequestType }): ReactElement => {

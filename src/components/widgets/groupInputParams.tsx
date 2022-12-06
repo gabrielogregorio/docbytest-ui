@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { paramsType } from '../../core/interfaces/api';
+import { paramsType } from '@/interfaces/api';
 import { MethodRequestAndUrl } from './methodRequestAndUrl';
 
 export const GroupMethodRequestAndUrls = ({ params, title }: { params: paramsType[]; title: string }): ReactElement => {

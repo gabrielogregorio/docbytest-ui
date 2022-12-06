@@ -1,9 +1,9 @@
 import { ReactElement, useContext } from 'react';
-import { DataContext } from '../../../core/contexts/dataProvider';
-import { DocSelectedContext } from '../../../core/contexts/docSelectedProvider';
-import { testsType } from '../../../core/interfaces/api';
-import { normalizeStrings } from '../../../core/normalizers/strings';
-import { GroupCases } from '../groupCases';
+import { DataContext } from '@/contexts/dataProvider';
+import { DocSelectedContext } from '@/contexts/docSelectedProvider';
+import { testsType } from '@/interfaces/api';
+import { normalizeStrings } from '@/normalizers/strings';
+import { GroupCases } from '@/widgets/groupCases';
 import { mountDocs } from './mountDocs';
 import { mountTestSuit } from './mountTestSuit';
 
