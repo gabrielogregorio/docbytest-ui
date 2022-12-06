@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from 'react';
-import { parametersExampleType } from '../../core/interfaces/api';
+import { parametersExampleType } from '@/interfaces/api';
 import { CopyClipboard } from './copyClipboard';
 
 type MethodRequestAndUrlType = {

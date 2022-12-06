@@ -1,7 +1,7 @@
+import { initialStateDocSelectedType } from '@/contexts/docSelectedProvider';
+import { sortTestByStatusCode } from '@/helpers/sortTestByStatusCode';
+import { apiResponseFileTypes, testBaseObjectType, testsType } from '@/interfaces/api';
 import { groupCasesType } from '.';
-import { initialStateDocSelectedType } from '../../../core/contexts/docSelectedProvider';
-import { sortTestByStatusCode } from '../../../core/helpers/sortTestByStatusCode';
-import { apiResponseFileTypes, testBaseObjectType, testsType } from '../../../core/interfaces/api';
 
 type listBaseType = {
   tests: testsType[];

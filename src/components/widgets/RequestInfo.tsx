@@ -1,15 +1,10 @@
 import { ReactElement, useEffect, useState } from 'react';
+import { mountCurlRequest, mountHeadersParams, mountQueryParams, mountUrlParams } from '@/helpers/handleQueries';
+import { contentRequestType, paramsType } from '@/interfaces/api';
+import { InitialTestRunnerType } from '@/interfaces/testRunner';
 import { GroupMethodRequestAndUrls } from './groupInputParams';
-import {
-  mountCurlRequest,
-  mountHeadersParams,
-  mountQueryParams,
-  mountUrlParams,
-} from '../../core/helpers/handleQueries';
 import { GroupInputHeaders } from './groupInputHeaders';
 import { BoardViewer } from './boardViewer/index';
-import { contentRequestType, paramsType } from '../../core/interfaces/api';
-import { InitialTestRunnerType } from '../../core/interfaces/testRunner';
 
 const mountCurlRequestOrchestrator = (
   queryParams: paramsType[],

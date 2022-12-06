@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ReactElement, useContext } from 'react';
-import { Header } from '../components/layout/header';
-import { MenuContext, MenuProvider } from '../core/contexts/menuProvider';
-import { ThemeContext, ThemeProvider } from '../core/contexts/themProvider';
+import { Header } from '@/layout/header';
+import { MenuContext, MenuProvider } from '@/contexts/menuProvider';
+import { ThemeContext, ThemeProvider } from '@/contexts/themProvider';
 
 const MockComponent = (): ReactElement => {
   const { theme } = useContext(ThemeContext);

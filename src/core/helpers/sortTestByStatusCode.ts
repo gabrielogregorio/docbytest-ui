@@ -1,4 +1,4 @@
-import { testsType } from '../interfaces/api';
+import { testsType } from '@/interfaces/api';
 
 export function sortTestByStatusCode(tests: testsType[]): testsType[] {
   return tests.sort((first: testsType, second: testsType) => {

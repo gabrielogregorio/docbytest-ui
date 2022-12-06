@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { contentRequestType } from '../../core/interfaces/api';
+import { contentRequestType } from '@/interfaces/api';
 
 export const GroupExplainedHeaders = ({ headers }: { headers: contentRequestType }): ReactElement => {
   const headersKey: string[] = Object.keys(headers);

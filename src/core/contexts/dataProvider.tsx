@@ -1,5 +1,5 @@
 import { Context, createContext, ReactElement, ReactNode, useMemo, useState } from 'react';
-import { apiDocsType, apiResponseDocType, apiResponseFileTypes } from '../interfaces/api';
+import { apiDocsType, apiResponseDocType, apiResponseFileTypes } from '@/interfaces/api';
 
 type DataContextType = {
   setData: (data: apiResponseDocType) => void;

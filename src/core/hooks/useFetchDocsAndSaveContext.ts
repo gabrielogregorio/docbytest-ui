@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import { apiResponseDocType } from '../interfaces/api';
-import { DataContext } from '../contexts/dataProvider';
+import { apiResponseDocType } from '@/interfaces/api';
+import { DataContext } from '@/contexts/dataProvider';
 import { getUrlApi } from './getUrlApi';
 
 export const useFetchDocsAndSaveContext = (): { error: string; isLoading: boolean } => {

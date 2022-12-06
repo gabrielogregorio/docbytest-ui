@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-lines-per-function */
-import { mountRequestItem } from '../core/helpers/mountRequest';
-import { MountCurlMethodEnum, MountCurlTypeEnum, TypeToMountEnum } from '../core/helpers/mountRequest/types';
+import { mountRequestItem } from '@/helpers/mountRequest';
+import { MountCurlMethodEnum, MountCurlTypeEnum, TypeToMountEnum } from '@/helpers/mountRequest/types';
 
 describe('Curl Request', () => {
   it('should mount curl request complete, PUT, QUERY, HEADER, JSON', () => {

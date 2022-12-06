@@ -1,6 +1,6 @@
 import { ReactElement, useContext } from 'react';
-import { DocSelectedContext } from '../../../core/contexts/docSelectedProvider';
-import { testsType } from '../../../core/interfaces/api';
+import { DocSelectedContext } from '@/contexts/docSelectedProvider';
+import { testsType } from '@/interfaces/api';
 import { RenderTest } from './renderTest';
 import { RenderDocs } from './renderDocs';
 

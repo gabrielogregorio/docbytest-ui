@@ -4,9 +4,9 @@
 import { ReactElement } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { getUrlApi } from '@/hooks/getUrlApi';
 import { Code } from './code';
 import { Blockquote } from './blockquote';
-import { getUrlApi } from '../../hooks/getUrlApi';
 
 const { currentUrlOrigin } = getUrlApi();
 

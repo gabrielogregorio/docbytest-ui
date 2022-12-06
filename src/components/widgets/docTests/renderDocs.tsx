@@ -1,8 +1,8 @@
 import { ReactElement, useContext } from 'react';
-import { DataContext } from '../../../core/contexts/dataProvider';
-import { DocSelectedContext } from '../../../core/contexts/docSelectedProvider';
-import { apiDocsType, docItemType } from '../../../core/interfaces/api';
-import { InterpreterMarkdown } from '../../interpreterMarkdown';
+import { DataContext } from '@/contexts/dataProvider';
+import { DocSelectedContext } from '@/contexts/docSelectedProvider';
+import { apiDocsType, docItemType } from '@/interfaces/api';
+import { InterpreterMarkdown } from '@/components/interpreterMarkdown';
 
 export const RenderDocs = (): ReactElement => {
   const { docs } = useContext(DataContext);
