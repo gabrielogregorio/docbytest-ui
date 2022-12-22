@@ -1,12 +1,9 @@
-export const getUrlApi = (): { currentUrlAPi: string; currentUrlOrigin: string } => {
-  const currentUrlAPi: string = window.location.href;
+export const getUrlApi = (): { currentUrlOrigin: string } => {
   const currentUrlOrigin: string = window.location.origin;
 
-  // const currentUrlAPi = 'http://127.0.0.1:3333/docs'; // window.location.href;
-  // const currentUrlOrigin = 'http://127.0.0.1:3333'; // window.location.origin;
+  // const currentUrlOrigin: string = 'http://127.0.0.1:3333'; // window.location.origin;
 
   return {
-    currentUrlAPi,
     currentUrlOrigin,
   };
 };

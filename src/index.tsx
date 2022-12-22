@@ -17,7 +17,7 @@ root.render(
           <DataProvider>
             <BrowserRouter>
               <Routes>
-                <Route path="/docs" element={<App />} />
+                <Route path="*" element={<App />} />
               </Routes>
             </BrowserRouter>
           </DataProvider>
