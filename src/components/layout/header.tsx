@@ -1,7 +1,7 @@
 import { ReactElement, useContext } from 'react';
 import { ThemeContext } from '@/contexts/themProvider';
 import { MenuContext } from '@/contexts/menuProvider';
-import { IconDark, IconLight, IconMenu } from '@/icons/index';
+import { IconDark, IconLight, IconMenu, MainLogo } from '@/icons/index';
 
 export const Header = (): ReactElement => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -23,7 +23,9 @@ export const Header = (): ReactElement => {
           </button>
 
           <div className="mr-2">
-            <img src="/logo.png" alt="Logo do docbytet" className="hidden sm:block sm:w-[40px] sm:h-[29px]" />
+            <div>
+              <MainLogo />
+            </div>
           </div>
 
           <div id="main-title">docbytest</div>

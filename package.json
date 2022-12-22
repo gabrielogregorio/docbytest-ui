@@ -1,6 +1,6 @@
 {
   "name": "docbytest-ui",
-  "version": "3.0.2",
+  "version": "3.0.6",
   "homepage": "/docs",
   "private": false,
   "main": "build/index.js",
@@ -16,7 +16,7 @@
   "scripts": {
     "deploy": "gh-pages -d build",
     "dev": "vite",
-    "build": "vite build",
+    "build": "yarn clear && vite build && node replace.js",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage --watch=false",

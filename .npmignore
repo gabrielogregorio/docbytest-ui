@@ -1,6 +1,9 @@
 .github
 .vscode
 .prettierrc
+.prettierignore
+README.md
+vite.config.ts
 .eslintignore
 .eslintrc.json
 postcss.config.js
@@ -16,3 +19,6 @@ package.json
 package-lock.json
 tsconfig.tsbuildinfo
 commitlint.config.js
+replace.js
+.husky
+tests
