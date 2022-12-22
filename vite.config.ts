@@ -4,7 +4,7 @@ import { resolve } from 'path';
 
 export default defineConfig({
   root: '.',
-  base: '/docbytest-ui',
+  base: './docs',
   build: {
     outDir: 'build',
   },
